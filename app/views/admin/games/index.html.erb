@@ -1,0 +1,29 @@
+
+<%= flash[:notice] if flash[:notice] %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>游戏Id</th>
+      <th>游戏名称</th>
+      <th>广告Id</th>
+      <th>上架时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @games.each_with_index do |game, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= game.id.to_s %></td>
+      <td><%= game.name %></td>
+      <td><%= game.adId %></td>
+      <td><%= game.sale_at %></td>
+      <td><%= link_to '删除', admin_game_path(game), method: :delete, data: { confirm: "你确定要删除游戏么（绑定太多数据，不建议！）?" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新增游戏', new_admin_game_path %>

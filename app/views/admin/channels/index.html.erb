@@ -1,0 +1,27 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>Token</th>
+      <th>昵称</th>
+      <th>账号</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @channels.each_with_index do |channel, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= channel.id.to_s %></td>
+      <td><%= channel.name %></td>
+      <td><%= channel.account %></td>
+      <td>
+        <%= link_to '编辑', edit_admin_channel_path(channel) %>
+        <%= link_to '游戏管理', admin_channel_channel_games_path(channel) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新增渠道', new_admin_channel_path %>

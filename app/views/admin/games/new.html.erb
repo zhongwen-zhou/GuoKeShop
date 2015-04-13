@@ -1,0 +1,16 @@
+<h1>创建新游戏</h1>
+
+<%= form_for(['admin', @game]) do |f| %>
+游戏名称：<%= f.text_field :name, :placeholder => "请输入游戏名称" %>
+广告Id：<%= f.text_field :adId, :placeholder => "请输入广告Id" %>
+上架时间：<%= f.text_field :sale_at %>
+
+<%= f.submit('创建游戏') %>
+
+<% end %>
+
+<script>
+	$(function(){
+		$('#game_sale_at').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
+	});
+</script>

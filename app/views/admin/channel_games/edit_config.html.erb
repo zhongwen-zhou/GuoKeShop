@@ -1,0 +1,23 @@
+<h1>设置游戏统计数据</h1>
+
+<%= flash[:notice] if flash[:notice] %>
+<%= form_for([:admin, @channel_game.channel, @channel_game], :url => update_config_admin_channel_channel_game_path(@channel_game.channel, @channel_game), :method => :post) do |f| %>
+<% _game = @channel_game.game %>
+游戏名称：<%= _game.name %><br/>
+登录数：<%= text_field_tag 'login' %><br/>
+激活数：<%= text_field_tag 'active' %><br/>
+点击数：<%= text_field_tag 'click' %><br/>
+下载数：<%= text_field_tag 'download' %><br/>
+注册数：<%= text_field_tag 'registration' %><br/>
+次日留存率：<%= text_field_tag 'live' %>%<br/>
+充值金额：<%= text_field_tag 'payment' %><br/>
+发送日期：<%= text_field_tag 'send_date' %><br/>
+
+<%= f.submit('提交数据') %>
+
+<% end %>
+<script>
+  $(function(){
+    $('#send_date').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
+  });
+</script>

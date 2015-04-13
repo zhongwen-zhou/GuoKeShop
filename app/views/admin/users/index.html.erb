@@ -1,0 +1,20 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>昵称</th>
+      <th>账号</th>
+      <th>类型</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @users.each_with_index do |user, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= user.name %></td>
+      <td><%= user.account %></td>
+      <td><%= user.category %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

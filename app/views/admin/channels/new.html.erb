@@ -1,0 +1,10 @@
+<h1>新增渠道用户</h1>
+
+<%= form_for(['admin', @channel]) do |f| %>
+账号：<%= f.text_field :account, :placeholder => "请输入账号" %>
+昵称：<%= f.text_field :name, :placeholder => "请输入昵称" %>
+密码：<%= f.password_field :password, :placeholder => "请输入密码" %>
+
+<%= f.submit('提交') %>
+
+<% end %>

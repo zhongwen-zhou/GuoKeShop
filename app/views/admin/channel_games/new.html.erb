@@ -1,0 +1,15 @@
+</br>
+</br>
+<h1>创建新游戏</h1>
+
+<%= form_for([:admin, @channel, @channel_game], :url => admin_channel_channel_games_path(@channel)) do |f| %>
+游戏名称：
+<select name="channel_game[game_id]">
+	<% @games.each do |game| %>
+		<option value="<%= game.id.to_s %>"><%= game.name %></option>
+	<% end %>	
+</select>
+
+<%= f.submit('创建游戏') %>
+
+<% end %>

@@ -1,0 +1,87 @@
+网站欢迎你： <h2><%= current_channel.name %></h2>
+
+<% if false %>
+你的游戏有：
+<form action="<%= query_channel_channel_games_path(current_channel) %>" method="get">
+<input type="text" id="start_date" name="start_date"/> --- 
+<input type="text" id="end_date" name="end_date"/>
+<input type="submit" value="统计" />
+</form>
+<% end %>
+
+
+
+<ul class="nav nav-tabs" role="tablist" id="myTab">
+  <% current_channel.channel_games.each do |channel_game| %>
+    <li role="presentation" class="active">
+      <a href="#<%= "game_#{channel_game.game_id}" %>" role="tab" data-toggle="tab"><%= channel_game.game.name %></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content">
+  <% current_channel.channel_games.each do |channel_game| %>
+    <div role="tabpanel" class="tab-pane" id="<%= "game_#{channel_game.game_id}" %>">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>时间</th>
+          <th>游戏名</th>
+          <th>广告Id</th>
+          <th>平台</th>
+          <th>登录数</th>
+          <th>激活数</th>
+          <th>点击数</th>
+          <th>下载数</th>
+          <th>注册数</th>
+          <th>次日留存率</th>
+          <th>充值金额</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%
+        details = DataDetail.where(game_id: channel_game.game_id).order('send_date DESC')
+        game = channel_game.game
+      %>
+
+      <% details.each_with_index do |detail, index| %>
+
+        <tr>
+          <td><%= index %></td>
+          <td><%= detail.send_date %></td>
+          <td><%= game.name %></td>
+          <td><%= game.adId %></td>
+          <td><%= game.platform_name %></td>
+
+          <td><%= detail.pre_login_count %></td>
+          <td><%= detail.pre_active_count %></td>
+          <td><%= detail.pre_click_count %></td>
+          <td><%= detail.pre_download_count %></td>
+          <td><%= detail.pre_registration_count %></td>
+          <td><%= detail.pre_live_count %>%</td>
+          <td><%= detail.pre_payment_count %></td>
+        </tr>
+
+      <% end %>
+      </tbody>
+      </table>
+
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(function () {
+    $('#myTab').tab('show')
+  })
+</script>
+
+
+
+<script>
+  $(function(){
+    $('#start_date').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
+    $('#end_date').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
+  });
+</script>

@@ -1,0 +1,24 @@
+
+<%= flash[:notice] if flash[:notice] %>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>游戏名称</th>
+      <th>广告Id</th>
+      <th>上架时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @games.each_with_index do |channel_game, index| %>
+    <% game = channel_game.game %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= game.name %></td>
+      <td><%= game.adId %></td>
+      <td><%= game.sale_at %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
