@@ -1,0 +1,15 @@
+<h1>创建商品</h1>
+
+<%= form_for(['admin', @item]) do |f| %>
+商品名称：<%= f.text_field :name, :placeholder => "请输入商品名称" %><br/>
+商品品牌：<%= f.text_field :brand, :placeholder => "请输入商品品牌" %><br/>
+商品类别：<%= f.select :category_id, Category.all.collect { |p| [ p.name, p.id ] } %><br/>
+计量单位：<%= f.text_field :units, :placeholder => "请输入计量单位" %><br/>
+商品进价：<%= f.text_field :in_price, :placeholder => "请输入商品定价" %><br/>
+商品定价：<%= f.text_field :price, :placeholder => "请输入商品定价" %><br/>
+仓库存量：<%= f.text_field :repo_count, :placeholder => "请输入仓库存量" %><br/>
+商品描述：<%= f.text_area :desc, :placeholder => "请输入描述" %><br/>
+
+<%= f.submit('创建商品') %>
+
+<% end %>

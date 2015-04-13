@@ -1,87 +1,83 @@
-网站欢迎你： <h2><%= current_channel.name %></h2>
+<%= flash[:notice] if flash[:notice] %>
 
-<% if false %>
-你的游戏有：
-<form action="<%= query_channel_channel_games_path(current_channel) %>" method="get">
-<input type="text" id="start_date" name="start_date"/> --- 
-<input type="text" id="end_date" name="end_date"/>
-<input type="submit" value="统计" />
-</form>
-<% end %>
-
-
-
-<ul class="nav nav-tabs" role="tablist" id="myTab">
-  <% current_channel.channel_games.each do |channel_game| %>
-    <li role="presentation" class="active">
-      <a href="#<%= "game_#{channel_game.game_id}" %>" role="tab" data-toggle="tab"><%= channel_game.game.name %></a>
-    </li>
+<ul>
+  <% Category.all.each do |category| %>
+    <li><%= link_to category.name, items_path(category_id: category) %></li>
   <% end %>
 </ul>
 
-<div class="tab-content">
-  <% current_channel.channel_games.each do |channel_game| %>
-    <div role="tabpanel" class="tab-pane" id="<%= "game_#{channel_game.game_id}" %>">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>编号</th>
-          <th>时间</th>
-          <th>游戏名</th>
-          <th>广告Id</th>
-          <th>平台</th>
-          <th>登录数</th>
-          <th>激活数</th>
-          <th>点击数</th>
-          <th>下载数</th>
-          <th>注册数</th>
-          <th>次日留存率</th>
-          <th>充值金额</th>
-        </tr>
-      </thead>
-      <tbody>
-      <%
-        details = DataDetail.where(game_id: channel_game.game_id).order('send_date DESC')
-        game = channel_game.game
-      %>
-
-      <% details.each_with_index do |detail, index| %>
-
-        <tr>
-          <td><%= index %></td>
-          <td><%= detail.send_date %></td>
-          <td><%= game.name %></td>
-          <td><%= game.adId %></td>
-          <td><%= game.platform_name %></td>
-
-          <td><%= detail.pre_login_count %></td>
-          <td><%= detail.pre_active_count %></td>
-          <td><%= detail.pre_click_count %></td>
-          <td><%= detail.pre_download_count %></td>
-          <td><%= detail.pre_registration_count %></td>
-          <td><%= detail.pre_live_count %>%</td>
-          <td><%= detail.pre_payment_count %></td>
-        </tr>
-
-      <% end %>
-      </tbody>
-      </table>
-
-    </div>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>商品名</th>
+      <th>厂家</th>
+      <th>定价</th>
+      <th>仓库余量</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @items.each_with_index do |item, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= item.name %></td>
+      <td><%= item.brand %></td>
+      <td><%= item.price %></td>
+      <td><%= item.repo_count %></td>
+      <td>
+        <%= form_tag(add_cut_item_path(item)) do |f| %>
+          <label>数量</label>
+          <input type="text" name="count"></input>
+          <input type="hidden" name="price" value="<%= item.price %>"></input>
+          <input type="submit" value="加入购物车"></input>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
-</div>
-
-<script>
-  $(function () {
-    $('#myTab').tab('show')
-  })
-</script>
-
-
-
-<script>
-  $(function(){
-    $('#start_date').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
-    $('#end_date').datetimepicker({minView: '3', format: 'yyyy-mm-dd'});
-  });
-</script>
+  </tbody>
+</table>
+<hr/>
+<h3>购物车(<%= session[:cut].size %> 件商品)</h3>
+<%= link_to '清空购物车', clear_cut_items_path, method: :delete, data: { confirm: "你确定要清空购物车么?" } %>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>
+        商品名
+      </th>
+      <th>
+        单价
+      </th>
+      <th>
+        数量
+      </th>
+      <th>
+        总价
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total_price = 0 %>
+    <% session[:cut].each do |item| %>
+      <tr>
+        <td><%= Item.find(item['item_id']).name %></td>
+        <td><%= item['price'] %></td>
+        <td><%= item['count'] %></td>
+        <td><%= item_price = item['count'].to_i * item['price'].to_f %></td>
+        <% total_price += item_price %>
+      </tr>
+    <% end %>
+    <tr>
+      总计：<%= total_price %>
+    </tr>
+  </tbody>
+</table>
+<%= form_tag(orders_path) do |f| %>
+  <label>门牌号:</label>
+  <input type="text" name="address"></input>
+  <label>联系电话:</label>
+  <input type="text" name="telphone"></input>
+  <input type="hidden" name="total_price" value="<%= total_price %>"></input>
+  <input type="submit" value="提交订单"></input>
+<% end %>

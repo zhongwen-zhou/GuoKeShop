@@ -10,6 +10,23 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  resources :items do
+    member do
+      post :add_cut
+      post :remove_cut
+    end
+    collection do
+      delete :clear_cut
+    end
+  end
+
+  resources :orders do
+    member do
+      post :sent
+      post :accept
+    end
+  end
 
   # 渠道用户  
   resources :sessions, :only => [:new, :create, :destroy]
@@ -30,6 +47,13 @@ Rails.application.routes.draw do
   # 网站后台
   namespace :admin do
     root 'welcome#index'
+    resources :items
+    resources :orders do
+      member do
+        post :sent
+      end
+    end
+    resources :categories
     resources :games do
       member do
         get :channel_detail

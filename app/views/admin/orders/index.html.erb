@@ -1,0 +1,83 @@
+
+<%= flash[:notice] if flash[:notice] %>
+
+待发货订单
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>送货地址</th>
+      <th>送货电话</th>
+      <th>总金额</th>
+      <th>下单时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @wait_send_orders.each_with_index do |order, index| %>
+    <tr>
+      <td><%= order.no %></td>
+      <td><%= order.address %></td>
+      <td><%= order.telphone %></td>
+      <td><%= order.price %></td>
+      <td><%= order.created_at %></td>
+      <td><%= link_to '发货', sent_admin_order_path(order), method: :post, data: { confirm: "你确定配合成功可以发货?" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<hr></hr>
+
+待确认订单
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>送货地址</th>
+      <th>送货电话</th>
+      <th>总金额</th>
+      <th>下单时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @wait_accept_orders.each_with_index do |order, index| %>
+    <tr>
+      <td><%= order.no %></td>
+      <td><%= order.address %></td>
+      <td><%= order.telphone %></td>
+      <td><%= order.price %></td>
+      <td><%= order.created_at %></td>
+      <td><%= link_to '发货', sent_admin_order_path(order), method: :post, data: { confirm: "你确定配合成功可以发货?" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<hr/>
+
+已完成订单
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>送货地址</th>
+      <th>送货电话</th>
+      <th>总金额</th>
+      <th>下单时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @done_orders.each_with_index do |order, index| %>
+    <tr>
+      <td><%= order.no %></td>
+      <td><%= order.address %></td>
+      <td><%= order.telphone %></td>
+      <td><%= order.price %></td>
+      <td><%= order.created_at %></td>
+      <td><%= link_to '发货', sent_admin_order_path(order), method: :post, data: { confirm: "你确定配合成功可以发货?" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -21,18 +21,9 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <% if current_channel %>
           <li class="active">
-            <%= link_to '游戏列表', channel_channel_games_path(current_channel) %>
+            <%= link_to '热销商品', items_path %>
           </li>
-          <li>
-            <%= link_to '修改密码', edit_password_channel_path(current_channel) %>
-          </li>
-
-          <li>
-            <%= link_to '注销', session_path('i'), method: :delete %>
-          </li>
-          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

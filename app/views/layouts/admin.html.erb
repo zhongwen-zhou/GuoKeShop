@@ -23,19 +23,17 @@
         <ul class="nav navbar-nav">
           <% if current_user %>
           <li class="active">
-            <%= link_to '游戏列表', admin_games_path %>
+            <%= link_to '商品列表', admin_items_path %>
+          </li>
+          <li>
+            <%= link_to '订单列表', admin_orders_path %>
           </li>
           <li>
             <%= link_to '用户列表', admin_users_path %>
           </li>
-
-          <li>
-            <%= link_to '渠道列表', admin_channels_path %>
-          </li>
           <li>
             <%= link_to '修改密码', edit_password_admin_user_path(current_user) %>
           </li>
-
           <li>
             <%= link_to '注销', admin_session_path('i'), method: :delete %>
           </li>

@@ -1,0 +1,35 @@
+
+<%= flash[:notice] if flash[:notice] %>
+
+<ul>
+  <% Category.all.each do |category| %>
+    <li><%= link_to category.name, admin_items_path(category_id: category) %></li>
+  <% end %>
+</ul>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>商品名</th>
+      <th>厂家</th>
+      <th>定价</th>
+      <th>仓库余量</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @items.each_with_index do |item, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= item.name %></td>
+      <td><%= item.brand %></td>
+      <td><%= item.price %></td>
+      <td><%= item.repo_count %></td>
+      <td><%= link_to '删除', admin_item_path(item), method: :delete, data: { confirm: "你确定要删除游戏么（绑定太多数据，不建议！）?" } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新增游戏', new_admin_item_path %>
