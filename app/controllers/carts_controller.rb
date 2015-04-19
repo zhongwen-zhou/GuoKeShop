@@ -1,8 +1,20 @@
 class CartsController < ApplicationController
-
+	skip_before_action :verify_authenticity_token, only: ['add_to_cart']
 	def index
 		render json: session[:cut]
 		# render json: {'32faf' => {count: 3, price: 3.00
+	end
+
+	def current_carts
+		# render json: {'32faf' => {count: 3, price: 3.00}}
+		# render json: {
+		@items = [{id: '123', count: 3, price: 3.00}, {id: '234', count: 4, price: 4}]
+	end
+
+	def add_to_cart
+		logger.info('!!!!')
+		logger.info(params['item_id'])
+		render json: true
 	end
 
 	def add_cut

@@ -18,6 +18,8 @@ class Item
 	field :desc, type: Integer	#详情描述
 	field :desc_html, type: Integer	#html版详情描述
 
+	field :cover, type: String	#图片
+
 	attr_accessor :cover, :cover_cache
 
 	belongs_to :category #分类

@@ -24,6 +24,7 @@
 仓库存量：<%= f.text_field :repo_count, :placeholder => "请输入仓库存量" %><br/>
 封面图片：<%= f.file_field :cover %><br/>
 <%= f.hidden_field :cover_cache %>
+
 商品描述：<%= f.text_area :desc, :placeholder => "请输入描述" %><br/>
 
 <%= f.submit('创建商品') %>

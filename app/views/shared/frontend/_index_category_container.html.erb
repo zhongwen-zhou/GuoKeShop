@@ -1,0 +1,20 @@
+<!-- BEGIN SIDEBAR -->
+<div class="sidebar col-md-3 col-sm-4">
+  <ul class="list-group margin-bottom-25 sidebar-menu">
+    <% Category.where(level: 1).each do |top_category| %>
+    <li class="list-group-item clearfix dropdown">
+      <a href="shop-product-list.html">
+        <i class="fa fa-angle-right"></i>
+        <%= top_category.name %>
+        <i class="fa fa-angle-down"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <% top_category.children.each do |category| %>
+        <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> <%= category.name %></a></li>
+        <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<!-- END SIDEBAR -->
