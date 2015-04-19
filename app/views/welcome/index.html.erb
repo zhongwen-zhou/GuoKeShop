@@ -1,11 +1,31 @@
 <%= flash[:notice] if flash[:notice] %>
 
-<ul>
-  <% Category.all.each do |category| %>
-    <li><%= link_to category.name, items_path(category_id: category) %></li>
-  <% end %>
-</ul>
+<div id="main-ad-container">
+  <p>这是广告</p>
+</div>
 
+<div id="main-item-list-container">
+  <ul>
+    <% @items.each_with_index do |item, index| %>
+      <li>
+        <div>
+          <%= image_tag('item.png', width: 120, height: 120) %>
+          <%= item.name %>
+          <%= item.units %>
+          <%= item.price %>
+
+        <%= form_tag(add_cut_item_path(item)) do |f| %>
+          <input type="submit" value="加入购物车"></input>
+        <% end %>
+
+        <a href="javascript: void();" onclick="add_to_cart('<%= item.id %>');">加入购物车</a>
+
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<% if false %>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -38,46 +58,4 @@
   </tbody>
 </table>
 <hr/>
-<h3>购物车(<%= session[:cut].size %> 件商品)</h3>
-<%= link_to '清空购物车', clear_cut_items_path, method: :delete, data: { confirm: "你确定要清空购物车么?" } %>
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>
-        商品名
-      </th>
-      <th>
-        单价
-      </th>
-      <th>
-        数量
-      </th>
-      <th>
-        总价
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% total_price = 0 %>
-    <% session[:cut].each do |item| %>
-      <tr>
-        <td><%= Item.find(item['item_id']).name %></td>
-        <td><%= item['price'] %></td>
-        <td><%= item['count'] %></td>
-        <td><%= item_price = item['count'].to_i * item['price'].to_f %></td>
-        <% total_price += item_price %>
-      </tr>
-    <% end %>
-    <tr>
-      总计：<%= total_price %>
-    </tr>
-  </tbody>
-</table>
-<%= form_tag(orders_path) do |f| %>
-  <label>门牌号:</label>
-  <input type="text" name="address"></input>
-  <label>联系电话:</label>
-  <input type="text" name="telphone"></input>
-  <input type="hidden" name="total_price" value="<%= total_price %>"></input>
-  <input type="submit" value="提交订单"></input>
 <% end %>

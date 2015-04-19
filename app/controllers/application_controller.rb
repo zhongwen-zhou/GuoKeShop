@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  # def pjax_layout
+    # 'pjax'
+  # end
+
 	# before_filter :authorize_login
   # helper_method :current_channel
 

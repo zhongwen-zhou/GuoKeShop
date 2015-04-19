@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :carts
   
   resources :items do
     member do

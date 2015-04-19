@@ -2,8 +2,17 @@
 <%= flash[:notice] if flash[:notice] %>
 
 <ul>
-  <% Category.all.each do |category| %>
-    <li><%= link_to category.name, admin_items_path(category_id: category) %></li>
+  <% Category.where(level: 1).each do |top_category| %>
+    <ul>
+      <div>
+        <p><%= top_category.name %></p>
+        <ul>
+          <% top_category.children.each do |category| %>
+            <li><%= link_to category.name, admin_items_path(category_id: category) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </ul>
   <% end %>
 </ul>
 

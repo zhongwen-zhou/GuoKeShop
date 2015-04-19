@@ -1,20 +1,19 @@
-class ItemsController < ApplicationController
+class CartsController < ApplicationController
+
+	def index
+		render json: session[:cut]
+		# render json: {'32faf' => {count: 3, price: 3.00
+	end
 
 	def add_cut
 		item = Item.find params[:id]
 		session[:cut].push({item_id: params[:id], price: item.price, count: 1})
-		render json: true
-		# redirect_to root_path
+		redirect_to root_path
 	end
 
 	def clear_cut
 		session[:cut] = []
 		redirect_to root_path
-	end
-
-	def index
-		@items = Item.where(category_id: params[:category_id])
-		render 'welcome/index'
 	end
 
 	def new

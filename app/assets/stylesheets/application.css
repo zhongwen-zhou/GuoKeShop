@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+
+#category-list {
+	width: 360px;
+	float: left;
+}
+
+#shopping-cart {
+	width: 400px;
+	float: right;
+}
+
+#main-container {
+	width: 700px;
+	float: left;
+}
+
+#main-ad-container {
+	width: 700px;
+	height: 300px;
+}

@@ -6,6 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Category.create(name: '食材')
-Category.create(name: '饮料')
-Category.create(name: '女生用品')
+jiu = Category.create(name: '酒', level: 1)
+['白酒','洋酒','啤酒','其他'].each do |name|
+	Category.create(name: name, level: 2, parent: jiu)
+end
+yl = Category.create(name: '饮料', level: 1)
+['碳酸饮料','矿泉水','牛奶','其他'].each do |name|
+	Category.create(name: name, level: 2, parent: yl)
+end
+ls = Category.create(name: '零食', level: 1)
+['饼干类','面包','薯片','水果干活'].each do |name|
+	Category.create(name: name, level: 2, parent: ls)
+end

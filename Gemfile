@@ -27,8 +27,13 @@ gem 'spring',        group: :development
 gem 'mongoid'
 gem 'mongoid_will_paginate'
 
+gem 'mini_magick'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
 gem 'pry'
 gem 'pry-rails'
+
+gem 'pjax_rails'
 
 gem 'thin'
 
