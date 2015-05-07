@@ -1,21 +1,51 @@
 class CartsController < ApplicationController
-	skip_before_action :verify_authenticity_token, only: ['add_to_cart']
+	skip_before_action :verify_authenticity_token, only: ['add_to_cart', 'remove_from_cart']
+
 	def index
-		render json: session[:cut]
-		# render json: {'32faf' => {count: 3, price: 3.00
+	  @carts = session[:carts] || {}
+	  @total_price = 0
+	  @item_total_price = 0
+	  @shipping_price = 0
+	  @items = []
+	  unless @carts.keys.empty?
+		  @carts.keys.each do |key|
+		  	item = @carts[key]
+		  	item_price = item['price'].to_f * item['count'].to_i
+		  	@items.push({id: key, name: item['name'], price: item['price'], item_price: item_price, count: item['count']})
+		  	@item_total_price += item_price
+		  end
+		end
+		@shipping_price = 2 if @item_total_price < 30
+		@total_price = @shipping_price + @item_total_price
 	end
 
 	def current_carts
-		# render json: {'32faf' => {count: 3, price: 3.00}}
-		# render json: {
-		@items = [{id: '123', count: 3, price: 3.00}, {id: '234', count: 4, price: 4}]
+	  @carts = session[:carts] || {}
+	  @total_price = 0
+	  unless @carts.keys.empty?
+		  @carts.keys.each do |key|
+		  	item = @carts[key]
+		  	item_price = item['price'].to_f * item['count'].to_i
+		  	@total_price += item_price
+		  end
+		end
+
+
+		render '/shared/frontend/_shopping_cart_container', layout: false
 	end
 
 	def add_to_cart
-		logger.info('!!!!')
-		logger.info(params['item_id'])
+		item = Item.find params['item_id']
+		return render status: 403, json: {status: 'no_item_count'} if item.empty_repos?
+		session[:carts] ||= {}
+		session[:carts].merge!({item.id.to_s => {name: item.name, count: params[:count], price: item.price}})
 		render json: true
 	end
+
+	def remove_from_cart
+		session[:carts].delete params['item_id']
+		render json: true
+	end	
 
 	def add_cut
 		item = Item.find params[:id]

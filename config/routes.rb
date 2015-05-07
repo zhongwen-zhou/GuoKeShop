@@ -14,11 +14,16 @@ Rails.application.routes.draw do
   resources :carts do
     collection do
       post :add_to_cart
+      post :remove_from_cart
       get :current_carts
     end
   end
-  
+
   resources :items do
+    collection do
+      get :category
+      post :search
+    end
     member do
       post :add_cut
       post :remove_cut
@@ -29,6 +34,9 @@ Rails.application.routes.draw do
   end
 
   resources :orders do
+    collection do
+      get :checkout_view
+    end
     member do
       post :sent
       post :accept

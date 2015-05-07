@@ -1,46 +1,41 @@
 
 <%= flash[:notice] if flash[:notice] %>
 
-待发货订单
+订单详情
+<p>订单编号: <span><%= @order.no %></span></p>
+<p>收货人称呼: <span><%= @order.name %></span></p>
+<p>收货地址: <span><%= @order.address %></span></p>
+<p>收货电话: <span><%= @order.telphone %></span></p>
+<p>商品金额: <span><%= @order.items_total_price %></span></p>
+<p>派送费: <span><%= @order.shipping_price %></span></p>
+<p>总金额: <span><%= @order.total_price %></span></p>
+<p>下单时间: <span><%= @order.created_at %></span></p>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>订单编号</th>
-      <th>收货人称呼</th>
-      <th>收货地址</th>
-      <th>收货电话</th>
-      <th>商品金额</th>
-      <th>派送费</th>
-      <th>总金额</th>
-      <th>下单时间</th>
-      <th>订单备注</th>
-      <th>操作</th>
+      <th>编号</th>
+      <th>商品名称</th>
+      <th>商品规格</th>
+      <th>商品单价</th>
+      <th>商品数量</th>
+      <th>商品总价</th>
     </tr>
   </thead>
   <tbody>
-  <%= @wait_send_orders.each_with_index do |order, index| %>
+  <% @order.items.each_with_index do |item, index| %>
     <tr>
-      <td><%= order.no %></td>
-      <td><%= order.name %></td>
-      <td><%= order.address %></td>
-      <td><%= order.telphone %></td>
-      <td><%= order.items_total_price %></td>
-      <td><%= order.shipping_price %></td>
-      <td><%= order.total_price %></td>
-      <td><%= order.created_at.strftime('%Y-%m-%d') %></td>
-      <td><%= order.remark %></td>
-      <td>
-        <%= link_to '发货', sent_admin_order_path(order), method: :post, data: { confirm: "你确定配合成功可以发货?" } %>
-        <%= link_to '订单详情', admin_order_path(order) %>
-      </td>
+      <td><%= index %></td>
+      <td><%= item[:name] %></td>
+      <td><%#= item.address %></td>
+      <td><%= item[:price] %></td>
+      <td><%= item[:count] %></td>
+      <td><%= item[:item_price] %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<hr></hr>
-
-<% if true %>
+<% if false %>
 待确认订单
 <table class="table table-bordered table-hover">
   <thead>

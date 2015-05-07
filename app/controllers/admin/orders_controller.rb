@@ -1,9 +1,16 @@
 module Admin
 class OrdersController < BaseController
+	before_action do
+		@current_tab = 'orders'
+	end
 	def index
 		@wait_send_orders = Order.where(status: 2)
 		@wait_accept_orders = Order.where(status: 3)
 		@done_orders = Order.where(status: 4)
+	end
+
+	def show
+		@order = Order.find params[:id]
 	end
 
 	def sent

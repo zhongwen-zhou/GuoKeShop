@@ -1,0 +1,9 @@
+<h1>创建新类别</h1>
+
+<%= form_for(['admin', @category]) do |f| %>
+类别名称：<%= f.text_field :name, :placeholder => "请输入类别名称" %><br/>
+上级类别：<%= f.select :parent_id, Category.top_category.collect { |p| [ p.name, p.id ] }, include_blank: true %><br/>
+货架号：<%= f.text_field :shelf_no, :placeholder => "请输入货架号" %><br/>
+<%= f.submit('创建新类别') %>
+
+<% end %>

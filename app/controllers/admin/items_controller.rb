@@ -1,5 +1,10 @@
 module Admin
 class ItemsController < BaseController
+
+	before_action do
+		@current_tab = 'items'
+	end
+
 	def index
 		@items = Item.where(category_id: params[:category_id])
 	end

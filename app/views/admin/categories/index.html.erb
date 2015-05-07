@@ -1,0 +1,38 @@
+
+<%= flash[:notice] if flash[:notice] %>
+
+<ul>
+  <% @top_categories.each do |category| %>
+    <li><%= link_to category.name, admin_categories_path(category_id: category) %></li>
+  <% end %>
+</ul>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>分类名</th>
+      <th>货架号</th>
+      <th>商品数量</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if true %>
+  <%= @categories.each_with_index do |category, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= category.name %></td>
+      <td><%= category.shelf_no %></td>
+      <td><%= link_to Item.where(category_id: category).count, admin_items_path(category_id: category) %></td>
+      <td>
+        <%= link_to '删除', admin_category_path(category), method: :delete, data: { confirm: "删除该分类，该分类下的商品将没有分类信息不便于查找哦！" } %>
+        <%= link_to '编辑', edit_admin_category_path(category) %>
+      </td>
+    </tr>
+  <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新增类别', new_admin_category_path %>

@@ -1,55 +1,68 @@
 class OrdersController < ApplicationController
+	skip_before_action :verify_authenticity_token, only: ['create', 'remove_from_cart']
 
-	def add_cut
-		session[:cut].push({item_id: params[:item_id], count: params[:count], price: params[:price]})
-		# render 'welcome/index'
-		redirect_to root_path
-	end
-	def index
-		@items = Item.where(category_id: params[:category_id])
-		render 'welcome/index'
+	def checkout_view
+	  @carts = session[:carts] || {}
+	  @total_price = 0
+	  @item_total_price = 0
+	  @shipping_price = 0
+	  @items = []
+	  unless @carts.keys.empty?
+		  @carts.keys.each do |key|
+		  	item = @carts[key]
+		  	item_price = item['price'].to_f * item['count'].to_i
+		  	@items.push({id: key, name: item['name'], price: item['price'], item_price: item_price, count: item['count']})
+		  	@item_total_price += item_price
+		  end
+		end
+		@shipping_price = 2 if @item_total_price < 30
+		@total_price = @shipping_price + @item_total_price
 	end
 
-	def new
-		@item = Item.new
-	end
 
 	def create
-		order = Order.new
-		# (params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id))
+
+	  @carts = session[:carts] || {}
+	  total_price = 0
+	  items_total_price = 0
+	  shipping_price = 0
+	  items = []
+	  unless @carts.keys.empty?
+		  @carts.keys.each do |key|
+		  	item = @carts[key]
+		  	item_price = item['price'].to_f * item['count'].to_i
+		  	items.push({item_id: key, name: item['name'], price: item['price'], item_price: item_price, count: item['count']})
+		  	items_total_price += item_price
+		  end
+		end
+		shipping_price = 2 if items_total_price < 30
+		total_price = shipping_price + items_total_price
+
+
+		order = Order.new#(params.require(:category).permit(:name, :parent_id, :shelf_no))
+
 		order.no = Time.now.to_i
+		order.items = []
 		order.address = params[:address]
 		order.telphone = params[:telphone]
-		order.items = []
+		order.name = params[:name]
+		order.remark = params[:remark]
+
+		order.items_total_price = items_total_price
+		order.shipping_price = shipping_price
+		order.total_price = total_price
+
+
+
+
+
+		order.items = items
 		order.status = 2
-		order.price = params[:total_price]
-		session[:cut].each do |item|
-			order.items.push({item_id: params[:id], count: params[:count], price: params[:price]})
-		end
 		order.save!
 
-		session[:cut] = []
+		session[:carts] = {}
+
 		redirect_to root_path, notice: '您已下单成功！'
 	end
 
-	def destroy
-		@item = Item.find params[:id]
-		@item.destroy
-		
-		redirect_to root_path, notice: '您已下单成功！'
-	end
-
-	def query
-		@items = Item.all
-	end
-
-	def channel_detail
-		@item = Item.find params[:id]
-		@channel_items = ChannelItem.where(item: @item)
-	end
-
-	def query_channel_detail
-		@item = Item.find params[:id]
-		@channel_items = ChannelItem.where(item: @item)
-	end
 end

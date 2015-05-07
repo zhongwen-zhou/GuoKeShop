@@ -1,35 +1,35 @@
-        <!-- BEGIN CART -->
-        <div class="top-cart-block">
-          <div class="top-cart-info">
-            <a id="items-count" href="javascript:void(0);" class="top-cart-info-count"></a>
-            <a id="carts-total-price" href="javascript:void(0);" class="top-cart-info-value"></a>
-          </div>
-          <i class="fa fa-shopping-cart"></i>
-          <div class="top-cart-content-wrapper">
-            <div class="top-cart-content">
-              <ul id="items-container" class="scroller" style="height: 250px;">
-                <li>
-                  <a href="shop-item.html"><img src="../../assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="../../assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-              </ul>
-              <div class="text-right">
-                <a href="shop-shopping-cart.html" class="btn btn-default">View Cart</a>
-                <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
-              </div>
-            </div>
-          </div>            
+<%
+  @carts ||= {}
+  @total_price ||= 0
+%>
 
-
-        </div>
-        <!--END CART -->
+<!-- BEGIN CART -->
+<div class="top-cart-block">
+  <div class="top-cart-info">
+    <a href="javascript:void(0);" class="top-cart-info-count"><%= @carts.keys.size %> 个商品</a>
+    <a href="javascript:void(0);" class="top-cart-info-value">¥<%= @total_price %></a>
+  </div>
+  <i class="fa fa-shopping-cart"></i>
+                
+  <div class="top-cart-content-wrapper">
+    <div class="top-cart-content">
+      <ul class="scroller" style="height: <%= @carts.keys.count * 50 %>px;">
+        <% @carts.keys.each do |key| %>
+          <% item = @carts[key] %>
+        <li>
+          <a href="shop-item.html"><img src="../../assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+          <span class="cart-content-count">x <%= item['count'] %></span>
+          <strong><a href="shop-item.html"><%= item['name'] %></a></strong>
+          <em>¥<%= item['price'] %></em>
+          <a href="javascript:void(0);" class="del-goods" item-id="<%= key %>">&nbsp;</a>
+        </li>
+        <% end %>
+      </ul>
+      <div class="text-right">
+        <a href="/carts" class="btn btn-default">查看购物车</a>
+        <a href="/orders/checkout_view" class="btn btn-primary">结算</a>
+      </div>
+    </div>
+  </div>            
+</div>
+<!--END CART -->

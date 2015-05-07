@@ -1,20 +1,25 @@
 class ItemsController < ApplicationController
-
-	def add_cut
-		item = Item.find params[:id]
-		session[:cut].push({item_id: params[:id], price: item.price, count: 1})
-		render json: true
-		# redirect_to root_path
+	def category
+		@current_category = Category.find params[:category_id]
+		if @current_category.level == 1
+			@items = Item.where(category_id: @current_category).paginate(:page => params[:page], :per_page => 20)
+		else
+			@items = Item.where(top_category_id: @current_category.parent_id).paginate(:page => params[:page], :per_page => 20)
+		end
 	end
 
-	def clear_cut
-		session[:cut] = []
-		redirect_to root_path
+	def search
+		@items = Item.where(name: /#{params[:keyword]}/).all
 	end
 
 	def index
 		@items = Item.where(category_id: params[:category_id])
 		render 'welcome/index'
+	end
+
+	def show
+		@item = Item.find params[:id]
+		render '/shared/frontend/_item_fast_view', layout: false
 	end
 
 	def new

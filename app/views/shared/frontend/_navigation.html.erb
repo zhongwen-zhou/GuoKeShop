@@ -2,7 +2,7 @@
 <div class="header-navigation">
   <ul>
 
-    <% Category.where(level: 1).each do |top_category| %>
+    <% Category.top_category.each do |top_category| %>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">
         <%= top_category.name %> 
@@ -32,7 +32,7 @@
         </li>
         <% end %>
         <% top_category.children.each do |category| %>
-        <li><a href="shop-product-list.html"><%= category.name %></a></li>
+        <li><a href="/items/category?category_id=<%= category.id.to_s %>"><%= category.name %></a></li>
         <% end %>
       </ul>
       <!-- END DROPDOWN MENU -->
@@ -193,16 +193,18 @@
     <li class="menu-search">
       <span class="sep"></span>
       <i class="fa fa-search search-btn"></i>
+      <% if true %>
       <div class="search-box">
-        <form action="#">
+        <%= form_tag('/items/search') do |f| %>
           <div class="input-group">
-            <input type="text" placeholder="Search" class="form-control">
+            <input type="text" placeholder="请输入商品名" class="form-control" name="keyword">
             <span class="input-group-btn">
-              <button class="btn btn-primary" type="submit">Search</button>
+              <button class="btn btn-primary" type="submit">搜索</button>
             </span>
           </div>
-        </form>
+        <% end %>
       </div> 
+      <% end %>
     </li>
     <!-- END TOP SEARCH -->
   </ul>

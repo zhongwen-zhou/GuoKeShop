@@ -1,0 +1,302 @@
+<div class="main">
+  <div class="container">
+
+    <% if @items.empty? %>
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+      <!-- BEGIN CONTENT -->
+      <div class="col-md-12 col-sm-12">
+        <h1>购物车</h1>
+        <div class="shopping-cart-page">
+          <div class="shopping-cart-data clearfix">
+            <p>购物车是空</p>
+          </div>
+        </div>
+      </div>
+      <!-- END CONTENT -->
+
+
+
+    <% else %>
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+      <!-- BEGIN CONTENT -->
+      <div class="col-md-12 col-sm-12">
+        <h1>购物车</h1>
+        <form action="/orders" method="post" id='carts-form'>
+        <div class="goods-page">
+          <div class="goods-data clearfix">
+            <div class="table-wrapper-responsive">
+            <table summary="Shopping cart">
+              <tr>
+                <th class="goods-page-image"></th>
+                <th class="goods-page-description">商品信息</th>
+                <th class="goods-page-ref-no">Ref No</th>
+                <th class="goods-page-quantity">数量</th>
+                <th class="goods-page-price">单价</th>
+                <th class="goods-page-total" colspan="2">总价</th>
+              </tr>
+              <% @items.each do |item| %>
+              <tr>
+                <td class="goods-page-image">
+                  <a href="#"><img src="../../assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+                </td>
+                <td class="goods-page-description">
+                  <h3><a href="#"><%= item[:name] %></a></h3>
+                  <p><strong>规格</strong> - 容量: <%= item[:units] %></p>
+                  <em>More info is here</em>
+                </td>
+                <td class="goods-page-ref-no">
+                  javc2133
+                </td>
+                <td class="goods-page-quantity">
+                  <div class="product-quantity">
+                      <input id="product-quantity" type="text" value="<%= item[:count] %>" readonly class="form-control input-sm" item-id="<%= item[:id] %>">
+                  </div>
+                </td>
+                <td class="goods-page-price">
+                  <strong><span>¥</span><%= item[:price] %></strong>
+                </td>
+                <td class="goods-page-total">
+                  <strong><span item-id="<%= item[:id] %>">¥<%= item[:item_price] %></span></strong>
+                </td>
+                <td class="del-goods-col">
+                  <a class="del-goods" href="javascript: void(0);" item-id="<%= item[:id] %>">&nbsp;</a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+            </div>
+
+            <div class="shopping-total">
+              <ul>
+                <li>
+                  <em>商品总价</em>
+                  <strong class="price"><span role='item-total-price'>¥<%= @item_total_price %></span></strong>
+                </li>
+                <li>
+                  <em>派送费</em>
+                  <strong class="price"><span role='shipping-price'>¥<%= @shipping_price %></span></strong>
+                </li>
+                <li class="shopping-total-price">
+                  <em>订单总价</em>
+                  <strong class="price"><span role='total-price'>¥<%= @total_price %></span></strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <a href="/" class="btn btn-default" type="submit">继续选购商品 <i class="fa fa-shopping-cart"></i></a>
+          <button role="submit-carts" class="btn btn-primary" type="submit">结算 <i class="fa fa-check"></i></button>
+        </div>
+        </form>
+      </div>
+      <!-- END CONTENT -->
+    </div>
+    <!-- END SIDEBAR & CONTENT -->
+    <% end %>
+
+    <!-- BEGIN SIMILAR PRODUCTS -->
+    <div class="row margin-bottom-40">
+      <div class="col-md-12 col-sm-12">
+        <h2>更多热门商品</h2>
+        <div class="owl-carousel owl-carousel4">
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+              <div class="sticker sticker-new"></div>
+            </div>
+          </div>
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress2</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+            </div>
+          </div>
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress3</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+            </div>
+          </div>
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress4</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+              <div class="sticker sticker-sale"></div>
+            </div>
+          </div>
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress5</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+            </div>
+          </div>
+          <div>
+            <div class="product-item">
+              <div class="pi-img-wrapper">
+                <img src="../../assets/frontend/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                <div>
+                  <a href="../../assets/frontend/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                  <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                </div>
+              </div>
+              <h3><a href="shop-item.html">Berry Lace Dress6</a></h3>
+              <div class="pi-price">$29.00</div>
+              <a href="#" class="btn btn-default add2cart">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END SIMILAR PRODUCTS -->
+  </div>
+</div>
+
+<%= content_for :page_script do %>
+    <script src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="../../assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='../../assets/global/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="../../assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <script src="../../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+
+    <script src="../../assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var items = [];
+
+        <%
+          @items.each do |item|
+        %>
+          var item = {item_id: '<%= item[:id] %>', price: <%= item[:price] %>, count: 1, item_price: <%= item[:item_price] %>};
+          items.push(item);
+        <%
+          end
+        %>
+
+        function  initTouchspin_tony(){
+          $(".product-quantity .form-control").TouchSpin({
+              buttondown_class: "btn quantity-down",
+              buttonup_class: "btn quantity-up"
+          }).on('change',function(){
+            var count = $(this).val();
+            var item_id = $(this).attr('item-id');
+            var db_item = null;
+            for(var i=0;i<items.length;i++){
+              var _item = items[i];
+              if(_item.item_id == item_id){
+                db_item = _item;
+                break;
+              }
+            }
+
+            var item_price = count * db_item.price;
+
+            db_item.count ++;
+            db_item.item_price = item_price;
+
+
+            var url = "/carts/add_to_cart/";
+            $.post(url, {item_id: item_id, count: db_item.count}, function(data){
+              if(data){
+                refresh_cart();
+              }
+            });
+
+
+
+            var item_total_price = 0;
+            var shipping_price = 0;
+            var total_price = 0;
+
+            for(var i=0;i<items.length;i++){
+              var _item = items[i];
+              item_total_price += _item.item_price;
+            }
+
+            if(item_total_price < 30){
+              shipping_price = 2;
+            }
+            total_price = item_total_price + shipping_price;
+
+            $(".goods-page-total [item-id="+item_id+"]").text("¥"+item_price);
+
+            $("[role=item-total-price]").text("¥"+item_total_price);
+            $("[role=shipping-price]").text("¥"+shipping_price);
+            $("[role=total-price]").text("¥"+total_price);
+
+          });
+          $(".quantity-down").html("<i class='fa fa-angle-down'></i>");
+          $(".quantity-up").html("<i class='fa fa-angle-up'></i>");
+        }
+
+
+        jQuery(document).ready(function() {
+            Layout.init();    
+            Layout.initOWL();
+            // Layout.initTwitter();
+            Layout.initImageZoom();
+            // Layout.initTouchspin();
+            Layout.initUniform();
+            Layout.initSliderRange();
+
+            initTouchspin_tony();
+
+            $('[role=submit-carts]').click(function(e){
+
+              $.post('/orders/', {carts_data: items}, function(data){
+                // alert(data);
+                window.location.href="/orders/checkout_view";
+              });
+
+              // $('#carts-form').submit();
+
+
+              e.stopPropagation();
+              e.preventDefault();
+            });
+        });
+    </script>
+<% end %>
