@@ -24,7 +24,10 @@ class Item
 	field :on_sale, type: Boolean, default: false	#是否促销
 	field :top_category_id, type: String	#顶级栏目id
 
-	field :cover, type: String	#图片
+	field :cover_path, type: String	#封面图片路径
+	field :cover_path, type: String	#封面图片路径
+
+	# field :cover, type: String	#图片
 
 	attr_accessor :cover, :cover_cache
 

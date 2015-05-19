@@ -37,6 +37,8 @@ gem 'pjax_rails'
 
 gem 'thin'
 
+gem 'spreadsheet'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
