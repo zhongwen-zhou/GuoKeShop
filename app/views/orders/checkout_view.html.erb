@@ -1,4 +1,4 @@
-    <div class="main">
+    <div class="main" style="min-height: 660px;">
       <div class="container">
         <ul class="breadcrumb">
             <li><a href="index.html">首页</a></li>
@@ -181,7 +181,7 @@
                        <button class="btn btn-primary  pull-right" type="submit" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-address-content" id="button-payment-address">下单！</button>
                       <div class="checkbox pull-right">
                         <label>
-                          <input type="checkbox"> 我已阅读并同意 <a title="Privacy Policy" href="#">《责任声明》</a> &nbsp;&nbsp;&nbsp; 
+                          <input type="checkbox" checked="checked"> 我已阅读并同意 <a title="Privacy Policy" href="javascript: void(0);">《责任声明》</a> &nbsp;&nbsp;&nbsp; 
                         </label>
                       </div>                        
                     </div>
@@ -347,3 +347,15 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
+
+
+<%= content_for :page_script do %>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+          $('#button-confirm').click(function(){
+            $('#confirm-content').collapse('hide');
+            $('#payment-address-content').collapse('show');
+          });
+        });
+    </script>
+<% end %>

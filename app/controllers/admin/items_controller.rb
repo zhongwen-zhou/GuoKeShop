@@ -13,11 +13,23 @@ class ItemsController < BaseController
 		@item = Item.new
 	end
 
+	def edit
+		@item = Item.find(params[:id])
+	end
+
 	def create
 		item = Item.new(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id))
 		item.save!
 
 		redirect_to admin_items_path, notice: '创建成功！'
+	end
+
+	def update
+		item = Item.find(params[:id])
+		item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id))
+		# item.save!
+
+		redirect_to admin_items_path, notice: '编辑成功！'
 	end
 
 	def destroy

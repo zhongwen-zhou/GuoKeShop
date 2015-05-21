@@ -23,19 +23,24 @@
       <th>商品名</th>
       <th>厂家</th>
       <th>定价</th>
+      <th>进价</th>
       <th>仓库余量</th>
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
-  <%= @items.each_with_index do |item, index| %>
+  <% @items.each_with_index do |item, index| %>
     <tr>
       <td><%= index %></td>
       <td><%= item.name %></td>
       <td><%= item.brand %></td>
       <td><%= item.price %></td>
+      <td><%= item.in_price %></td>
       <td><%= item.repo_count %></td>
-      <td><%= link_to '删除', admin_item_path(item), method: :delete, data: { confirm: "你确定要删除游戏么（绑定太多数据，不建议！）?" } %></td>
+      <td>
+        <%= link_to '编辑', edit_admin_item_path(item) %>
+        <%= link_to '删除', admin_item_path(item), method: :delete, data: { confirm: "你确定要删除这件商品吗?" } %>
+      </td>
     </tr>
   <% end %>
   </tbody>
