@@ -16,8 +16,9 @@
       <ul class="scroller" style="height: <%= @carts.keys.count * 50 %>px;">
         <% @carts.keys.each do |key| %>
           <% item = @carts[key] %>
+          <% _item = Item.find(key) %>
         <li>
-          <a href="shop-item.html"><img src="../../assets/frontend/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+          <a href="shop-item.html"><img src="<%= "/items/#{_item.bar_code}/1.jpg" %>" alt="Rolex Classic Watch" width="37" height="34"></a>
           <span class="cart-content-count">x <%= item['count'] %></span>
           <strong><a href="shop-item.html"><%= item['name'] %></a></strong>
           <em>¥<%= item['price'] %></em>
@@ -25,10 +26,12 @@
         </li>
         <% end %>
       </ul>
+      <% unless @carts.empty? %>
       <div class="text-right">
         <a href="/carts" class="btn btn-default">查看购物车</a>
         <a href="/orders/checkout_view" class="btn btn-primary">结算</a>
       </div>
+      <% end %>
     </div>
   </div>            
 </div>

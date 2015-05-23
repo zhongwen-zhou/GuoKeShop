@@ -30,8 +30,9 @@
                 <% end %>
               </div>
               <div class="description">
-                <p><%= @item.desc %></p>
+                <p style="font-size: 22px;"><%= @item.desc %></p>
 
+                      <% if false %>
                       <table class="datasheet">
                         <tr>
                           <!-- <th colspan="2">Additional features</th> -->
@@ -40,15 +41,8 @@
                           <td class="datasheet-features-type">计量单位</td>
                           <td><%= @item.units %></td>
                         </tr>
-                        <tr>
-                          <td class="datasheet-features-type">生产日期</td>
-                          <td>700 gr.</td>
-                        </tr>
-                        <tr>
-                          <td class="datasheet-features-type">保质日期</td>
-                          <td>10 person</td>
-                        </tr>
                       </table>
+                      <% end %>
 
               </div>
               <% if false %>

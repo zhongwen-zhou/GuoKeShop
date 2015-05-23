@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 	skip_before_action :verify_authenticity_token, only: ['add_to_cart', 'remove_from_cart']
 
 	def index
-	  @carts = session[:carts] || {}
+	  @carts = session[:carts]# || {}
 	  @total_price = 0
 	  @item_total_price = 0
 	  @shipping_price = 0

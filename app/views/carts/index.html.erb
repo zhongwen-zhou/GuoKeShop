@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" style="margin-top:0px;">
   <div class="container">
 
     <% if @items.empty? %>
@@ -14,40 +14,33 @@
         </div>
       </div>
       <!-- END CONTENT -->
-
-
-
     <% else %>
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
       <!-- BEGIN CONTENT -->
       <div class="col-md-12 col-sm-12">
         <h1>购物车</h1>
-        <form action="/orders" method="post" id='carts-form'>
+        <form action="/orders/checkout_view/" method="get" id='carts-form'>
         <div class="goods-page">
           <div class="goods-data clearfix">
             <div class="table-wrapper-responsive">
-            <table summary="Shopping cart">
+            <table summary="Shopping cart" style="margin-top: 50px;">
               <tr>
                 <th class="goods-page-image"></th>
                 <th class="goods-page-description">商品信息</th>
-                <th class="goods-page-ref-no">Ref No</th>
                 <th class="goods-page-quantity">数量</th>
                 <th class="goods-page-price">单价</th>
                 <th class="goods-page-total" colspan="2">总价</th>
               </tr>
               <% @items.each do |item| %>
+              <% _item = Item.find item[:id] %>
               <tr>
                 <td class="goods-page-image">
-                  <a href="#"><img src="../../assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+                  <a href="#"><img src="<%= "/items/#{_item.bar_code}/1.jpg" %>" alt="Berry Lace Dress"></a>
                 </td>
                 <td class="goods-page-description">
                   <h3><a href="#"><%= item[:name] %></a></h3>
-                  <p><strong>规格</strong> - 容量: <%= item[:units] %></p>
-                  <em>More info is here</em>
-                </td>
-                <td class="goods-page-ref-no">
-                  javc2133
+                  <p><strong>规格</strong> <%= _item.units %></p>
                 </td>
                 <td class="goods-page-quantity">
                   <div class="product-quantity">
@@ -86,7 +79,8 @@
             </div>
           </div>
           <a href="/" class="btn btn-default" type="submit">继续选购商品 <i class="fa fa-shopping-cart"></i></a>
-          <button role="submit-carts" class="btn btn-primary" type="submit">结算 <i class="fa fa-check"></i></button>
+          <button class="btn btn-primary" type="submit">结算 <i class="fa fa-check"></i></button>
+          <!-- <button role="submit-carts" class="btn btn-primary" type="submit">结算 <i class="fa fa-check"></i></button> -->
         </div>
         </form>
       </div>

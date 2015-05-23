@@ -32,22 +32,19 @@
                         <tr>
                           <th class="checkout-image"></th>
                           <th class="checkout-description">商品信息</th>
-                          <th class="checkout-model">Model</th>
                           <th class="checkout-quantity">数量</th>
                           <th class="checkout-price">单价</th>
                           <th class="checkout-total">商品总价</th>
                         </tr>
                         <% @items.each do |item| %>
+                          <% _item = Item.find(item[:id]) %>
                         <tr>
                           <td class="checkout-image">
-                            <a href="#"><img src="../../assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+                            <a href="#"><img src="<%= "/items/#{_item.bar_code}/1.jpg" %>" alt="Berry Lace Dress"></a>
                           </td>
                           <td class="checkout-description">
-                            <h3><a href="#"><%= item[:name] %></a></h3>
-                            <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                            <em>More info is here</em>
-                          </td>
-                          <td class="checkout-model">RES.193</td>
+                            <h3><a href="javascript: void(0);"><%= item[:name] %></a></h3>
+                            <p><strong>规格</strong> <%= _item.try(:units) %></p>
                           <td class="checkout-quantity"><%= item[:count] %></td>
                           <td class="checkout-price"><strong><span>¥</span><%= item[:price] %></strong></td>
                           <td class="checkout-total"><strong><span>¥</span><%= item[:item_price] %></strong></td>
@@ -173,7 +170,7 @@
                       </div>
                     </div>
                     <div class="col-md-12">                      
-                      <label for="delivery-comments">订单留言</label>
+                      <label for="delivery-comments">订单留言(如有冷冻等要求，请在此说明！)</label>
                       <textarea id="delivery-comments" rows="8" class="form-control" name="remark"></textarea>
                     </div>
                     <hr>

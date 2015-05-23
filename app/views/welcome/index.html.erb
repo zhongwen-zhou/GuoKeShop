@@ -370,7 +370,9 @@
             Layout.initTouchspin();
 
 
-
+            $('a[role=category_nav_btn]').click(function(){
+              $(this).children()[0].click();
+            });
 
 
         });

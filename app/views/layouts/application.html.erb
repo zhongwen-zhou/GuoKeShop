@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest (the abov
 <!-- Head BEGIN -->
 <head>
   <meta charset="utf-8">
-  <title>果壳里的店</title>
+  <title>时时达网上超市</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -67,6 +67,12 @@ License: You must have a valid license purchased only from themeforest (the abov
   <!-- Theme styles END -->
 
   <%= csrf_meta_tag %>
+
+  <style type="text/css">
+    .toast-top-right{
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <!-- Head END -->
 
@@ -121,7 +127,10 @@ License: You must have a valid license purchased only from themeforest (the abov
     <!-- BEGIN HEADER -->
     <div class="header" style="width: 100%; position: fixed; z-index: 50;">
       <div class="container">
-        <a class="site-logo" href="/"><img src="../../assets/frontend/layout/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="/">
+          <img src="/assets/LOGO.png" alt="Metronic Shop UI" width="134px;" />
+          <%#= image_tag("LOGO.png", size: '134*34') %>
+        </a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -175,8 +184,8 @@ License: You must have a valid license purchased only from themeforest (the abov
           <div class="col-md-4 steps-block-col">
             <i class="fa fa-truck"></i>
             <div>
-              <h2>Free shipping</h2>
-              <em>Express delivery withing 3 days</em>
+              <h2>免费配送</h2>
+              <em>20分钟 极速达</em>
             </div>
             <span>&nbsp;</span>
           </div>
@@ -191,8 +200,8 @@ License: You must have a valid license purchased only from themeforest (the abov
           <div class="col-md-4 steps-block-col">
             <i class="fa fa-phone"></i>
             <div>
-              <h2>477 505 8877</h2>
-              <em>24/7 customer care available</em>
+              <h2>028-6143 8163</h2>
+              <em>24/7 全天候服务</em>
             </div>
           </div>
         </div>
@@ -356,6 +365,7 @@ License: You must have a valid license purchased only from themeforest (the abov
             var url = "/carts/add_to_cart/";
             $.post(url, {item_id: item_id, count: count}, function(data){
               if(data){
+                toastr.success('您已成功添加到购物车');
                 refresh_cart();
               }
             });
@@ -369,7 +379,7 @@ License: You must have a valid license purchased only from themeforest (the abov
             var url = "/carts/add_to_cart/";
             $.post(url, {item_id: item_id, count: count}, function(data){
               if(data){
-                toastr.info('您已成功添加到购物车');
+                toastr.success('您已成功添加到购物车');
                 refresh_cart();
                 $('#item-fast-view-container').empty();
                 $('#item-fast-view-container').remove();
@@ -385,7 +395,7 @@ License: You must have a valid license purchased only from themeforest (the abov
             var url = "/carts/remove_from_cart/";
             $.post(url, {item_id: item_id}, function(data){
               if(data){
-                toastr.info('您已成功从购物车中移除');
+                toastr.success('您已成功从购物车中移除');
                 refresh_cart();
               }
             });
@@ -410,7 +420,7 @@ License: You must have a valid license purchased only from themeforest (the abov
 
 // toastr[success]("Gnome & Growl type non-blocking notifications", "Toastr Notifications")
 
-// toastr.info('Are you the 6 fingered man?')
+// toastr.success('Are you the 6 fingered man?')
 
 // toastr.options = {
 //   "closeButton": true,
