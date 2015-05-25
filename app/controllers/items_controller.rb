@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
 	end
 
 	def search
-		@items = Item.where(name: /#{params[:keyword]}/).all
+		@items = Item.where(name: /#{params[:keyword]}/).all.paginate(:page => params[:page])
 	end
 
 	def index

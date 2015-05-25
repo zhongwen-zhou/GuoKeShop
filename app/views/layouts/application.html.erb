@@ -150,7 +150,9 @@ License: You must have a valid license purchased only from themeforest (the abov
 
 
     <!-- Start!!!! -->
-
+    <br/>
+    <br/>
+    <br/>
     <%= yield %>
 
     <!-- End!!!!! -->
@@ -381,9 +383,12 @@ License: You must have a valid license purchased only from themeforest (the abov
               if(data){
                 toastr.success('您已成功添加到购物车');
                 refresh_cart();
-                $('#item-fast-view-container').empty();
-                $('#item-fast-view-container').remove();
-                $.fancybox.close();
+
+                $('#item-fast-view-container').find('.product-page-cart').html("<span>您已加入购物车！</span>");
+                // $('#item-fast-view-container').empty();
+                // $('#item-fast-view-container').remove();
+                // $.fancybox($('#item-fast-view-container'), 'close');
+                // $.fancybox.close();
               }
             });
           });
@@ -413,7 +418,8 @@ License: You must have a valid license purchased only from themeforest (the abov
               Layout.initImageZoom();
               Layout.initTouchspin();
               // Layout.initImageZoom();
-              $.fancybox(x);
+              $.fancybox($('#item-fast-view-container'));
+              // $('#item-fast-view-container').fancybox();
             });
           });
 

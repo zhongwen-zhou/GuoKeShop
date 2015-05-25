@@ -18,7 +18,7 @@
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
       <!-- BEGIN SIDEBAR -->
-      <div class="sidebar col-md-3 col-sm-5">
+      <div class="sidebar col-md-3 col-sm-5" style="z-index: 1;">
         <ul class="list-group margin-bottom-25 sidebar-menu">
           <% Category.top_category.each do |top_category| %>
           <li class="list-group-item clearfix dropdown <%= 'active' if(top_category == @current_category || top_category == @current_category.parent)%>">
@@ -40,21 +40,13 @@
 
         <div class="sidebar-products clearfix">
           <h2>畅销商品</h2>
+          <% Item.hot.each do |item| %>
           <div class="item">
-            <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-            <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-            <div class="price">$31.00</div>
+            <a href="javascript: void(0);"><img src="/<%= item.cover_path %>" alt="Some Shoes in Animal with Cut Out"></a>
+            <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
+            <div class="price">¥<%= item.price %></div>
           </div>
-          <div class="item">
-            <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-            <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-            <div class="price">$23.00</div>
-          </div>
-          <div class="item">
-            <a href="shop-item.html"><img src="../../assets/frontend/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-            <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-            <div class="price">$86.00</div>
-          </div>
+          <% end %>
         </div>
       </div>
       <!-- END SIDEBAR -->
