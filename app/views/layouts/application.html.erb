@@ -72,6 +72,10 @@ License: You must have a valid license purchased only from themeforest (the abov
     .toast-top-right{
       margin-top: 50px;
     }
+
+    .product-item .add2cart {
+      color: #000000;
+    }
   </style>
 </head>
 <!-- Head END -->
@@ -187,15 +191,15 @@ License: You must have a valid license purchased only from themeforest (the abov
             <i class="fa fa-truck"></i>
             <div>
               <h2>免费配送</h2>
-              <em>20分钟 极速达</em>
+              <em>不限金额，全部免费配送</em>
             </div>
             <span>&nbsp;</span>
           </div>
           <div class="col-md-4 steps-block-col">
             <i class="fa fa-gift"></i>
             <div>
-              <h2>Daily Gifts</h2>
-              <em>3 Gifts daily for lucky customers</em>
+              <h2>极速达</h2>
+              <em>20分钟送货到家门口</em>
             </div>
             <span>&nbsp;</span>
           </div>
@@ -204,6 +208,8 @@ License: You must have a valid license purchased only from themeforest (the abov
             <div>
               <h2>028-6143 8163</h2>
               <em>24/7 全天候服务</em>
+              <br/>
+              <em>23：00-7:00 加收夜间服务费 5元</em>
             </div>
           </div>
         </div>
@@ -342,6 +348,8 @@ License: You must have a valid license purchased only from themeforest (the abov
 
     <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
     <!-- END CORE PLUGINS -->
+    <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+
 
 
     <script type="text/javascript">
@@ -422,7 +430,6 @@ License: You must have a valid license purchased only from themeforest (the abov
               // $('#item-fast-view-container').fancybox();
             });
           });
-
 
 // toastr[success]("Gnome & Growl type non-blocking notifications", "Toastr Notifications")
 

@@ -150,7 +150,7 @@
                 </div>
                 <div id="payment-address-content" class="panel-collapse collapse">
                   <div class="panel-body row">
-                  <%= form_tag(orders_path) do |f| %>
+                  <%= form_tag(orders_path, id: 'create_order_form') do |f| %>
                     <div class="col-md-4 col-sm-4">
                       <div class="form-group">
                         <label for="firstname">称呼<span class="require">*</span></label>
@@ -165,7 +165,7 @@
                     </div>                    
                     <div class="col-md-4 col-sm-4">
                       <div class="form-group">
-                        <label for="firstname">收货地址<span class="require">*</span></label>
+                        <label for="firstname">收货地址<span class="require">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：仅配送果壳里的城</label>
                         <input type="text" id="address" class="form-control" name="address">
                       </div>
                     </div>
@@ -349,6 +349,23 @@
 <%= content_for :page_script do %>
     <script type="text/javascript">
         jQuery(document).ready(function() {
+
+          $('#create_order_form').submit(function(){
+            var name_value = $('#name').val();
+            var telphone_value = $('#telphone').val();
+            var address_value = $('#address').val();
+
+            var check_result = true;
+            if(name_value == '' || telphone_value == '' || address_value == ''){
+              check_result = false;
+            }
+
+            if(!check_result){
+              bootbox.alert("请填写带'*'的必要信息！");
+              return false;
+            }
+          });
+
           $('#button-confirm').click(function(){
             $('#confirm-content').collapse('hide');
             $('#payment-address-content').collapse('show');

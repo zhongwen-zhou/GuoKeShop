@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
 
 		session[:carts] = {}
 
-		redirect_to root_path, notice: '您已下单成功！'
+		redirect_to root_path, notice: 'order created!'
 	end
 
 end
