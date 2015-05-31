@@ -6,8 +6,7 @@ class Order
 	STATUS_NEW = 1	# 新建
 	STATUS_PICKUP = 2	# 捡货中
 	STATUS_ON_WAY = 3	# 送货中
-	STATUS_ON_SURE = 4	# 收款确认
-	STATUS_DONE = 5	# 收款确认
+	STATUS_DONE = 4	# 完成确认
 
 	field :no, type: String	#订单编号
 	field :name, type: String	#收货人称呼
@@ -19,4 +18,7 @@ class Order
 	field :shipping_price, type: Float	#派送费
 	field :total_price, type: Float	#价格
 	field :items, type: Array	#商品
+
+	field :sent_at, type: DateTime	#送货时间
+	field :done_at, type: DateTime	#回执时间
 end

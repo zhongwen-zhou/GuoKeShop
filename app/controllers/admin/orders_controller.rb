@@ -14,8 +14,6 @@ class OrdersController < BaseController
 		@wait_send_orders = Order.where(status: 2)
 		@wait_accept_orders = Order.where(status: 3)
 		@done_orders = Order.where(status: 4)
-
-		Order.where(status: 1).update_all(status: 2)
 	end
 
 	def show
@@ -30,12 +28,14 @@ class OrdersController < BaseController
 	def sent
 		order = Order.find params[:id]
 		order.set(status: 3)
+		order.set(sent_at: Time.now)
 		redirect_to admin_orders_path, notice: '发货成功！'
 	end
 
-	def sent
+	def done
 		order = Order.find params[:id]
 		order.set(status: 4)
+		order.set(done_at: Time.now)
 		redirect_to admin_orders_path, notice: '发货成功！'
 	end
 

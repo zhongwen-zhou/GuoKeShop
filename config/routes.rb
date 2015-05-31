@@ -66,9 +66,14 @@ Rails.application.routes.draw do
     resources :orders do
       collection do
         get :new_comming_orders
+        get :new_index
+        get :wait_send_index
+        get :wait_done_index
+        get :done_index
       end
       member do
         post :sent
+        post :done
         get :print_detail_page
       end
     end
