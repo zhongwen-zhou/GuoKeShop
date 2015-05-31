@@ -4,9 +4,10 @@ class Order
 	include Mongoid::Timestamps
 
 	STATUS_NEW = 1	# 新建
-	STATUS_ON_WAY = 2	# 送货中
-	STATUS_ON_SURE = 3	# 收款确认
-	STATUS_DONE = 4	# 收款确认
+	STATUS_PICKUP = 2	# 捡货中
+	STATUS_ON_WAY = 3	# 送货中
+	STATUS_ON_SURE = 4	# 收款确认
+	STATUS_DONE = 5	# 收款确认
 
 	field :no, type: String	#订单编号
 	field :name, type: String	#收货人称呼

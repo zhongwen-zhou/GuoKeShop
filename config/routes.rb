@@ -64,8 +64,12 @@ Rails.application.routes.draw do
     root 'welcome#index'
     resources :items
     resources :orders do
+      collection do
+        get :new_comming_orders
+      end
       member do
         post :sent
+        get :print_detail_page
       end
     end
     resources :categories

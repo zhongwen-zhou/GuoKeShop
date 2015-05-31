@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
 
 
 		order.items = items
-		order.status = 2
+		order.status = 1
 		order.save!
 
 		session[:carts] = {}

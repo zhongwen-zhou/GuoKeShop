@@ -3,14 +3,28 @@ class OrdersController < BaseController
 	before_action do
 		@current_tab = 'orders'
 	end
+
+	def new_comming_orders
+		@new_orders = Order.where(status: 1)
+		return render json: {new_orders_count: @new_orders.count}
+	end
+	
 	def index
+		@new_orders = Order.where(status: 1)
 		@wait_send_orders = Order.where(status: 2)
 		@wait_accept_orders = Order.where(status: 3)
 		@done_orders = Order.where(status: 4)
+
+		Order.where(status: 1).update_all(status: 2)
 	end
 
 	def show
 		@order = Order.find params[:id]
+	end
+
+	def print_detail_page
+		@order = Order.find params[:id]
+		render layout: false
 	end
 
 	def sent

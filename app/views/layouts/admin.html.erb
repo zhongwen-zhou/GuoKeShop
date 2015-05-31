@@ -5,6 +5,9 @@
   <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
   <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+
 </head>
 <body>
 
@@ -50,5 +53,21 @@
 <br/>
 <%= yield %>
 
+  <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+  <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+
+
+<script type="text/javascript">
+  $(function() {
+    setInterval(function(){
+      $.get('/admin/orders/new_comming_orders.json', function(data){
+        console.log(data);
+        if(data.new_orders_count != 0){
+          toastr.info('您有新订单等待处理！');
+        }
+      });
+    }, 2500);
+  });
+</script>
 </body>
 </html>
