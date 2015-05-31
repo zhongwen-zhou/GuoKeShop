@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
 		  @carts.keys.each do |key|
 		  	item = @carts[key]
 		  	item_price = item['price'].to_f * item['count'].to_i
-		  	items.push({item_id: key, name: item['name'], price: item['price'], item_price: item_price, count: item['count']})
+		  	items.push({item_id: key, name: item['name'], price: item['price'], item_price: item_price, count: item['count'], units: item['units']})
 		  	items_total_price += item_price
 		  end
 		end

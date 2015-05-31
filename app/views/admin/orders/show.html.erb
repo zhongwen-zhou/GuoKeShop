@@ -9,6 +9,7 @@
 <p>商品金额: <span><%= @order.items_total_price %></span></p>
 <p>派送费: <span><%= @order.shipping_price %></span></p>
 <p>总金额: <span><%= @order.total_price %></span></p>
+<p>订单备注: <span><%= @order.remark %></span></p>
 <p>下单时间: <span><%= @order.created_at %></span></p>
 <table class="table table-bordered table-hover">
   <thead>
@@ -26,7 +27,7 @@
     <tr>
       <td><%= index %></td>
       <td><%= item[:name] %></td>
-      <td><%#= item.address %></td>
+      <td><%= item[:units] %></td>
       <td><%= item[:price] %></td>
       <td><%= item[:count] %></td>
       <td><%= item[:item_price] %></td>
