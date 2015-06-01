@@ -23,6 +23,26 @@
 货架地址：<%= f.text_field :shelf_no, :placeholder => "请输入货架地址" %><br/>
 仓库存量：<%= f.text_field :repo_count, :placeholder => "请输入仓库存量" %><br/>
 
+是否热销商品：
+<select name="item[hot]">
+	<option value="true" <%= "selected='selected'" if @item.hot %>>是</option>
+	<option value="false" <%= "selected='selected'" if !@item.hot %>>否</option>
+</select>
+<br/>
+是否特价商品：
+<select name="item[on_sale]">
+	<option value="true" <%= "selected='selected'" if @item.on_sale %>>是</option>
+	<option value="false" <%= "selected='selected'" if !@item.on_sale %>>否</option>
+</select>
+<br/>
+是否新品上市：
+<select name="item[new_arrivals]">
+	<option value="true" <%= "selected='selected'" if @item.new_arrivals %>>是</option>
+	<option value="false" <%= "selected='selected'" if !@item.new_arrivals %>>否</option>
+</select>
+
+
+
 商品描述：<%= f.text_area :desc, :placeholder => "请输入描述" %><br/>
 
 <%= f.submit('编辑商品') %>

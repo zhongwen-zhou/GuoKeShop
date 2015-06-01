@@ -1,5 +1,6 @@
 <!-- Tony Start!!! -->
 
+    <% if false %>
     <!-- BEGIN SLIDER -->
     <div class="page-slider margin-bottom-35">
       <!-- LayerSlider start -->
@@ -9,6 +10,7 @@
         <div class="ls-slide ls-slide1" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 24,25,27,28;">
 
           <img src="../../assets/frontend/pages/img/layerslider/slide1/bg.jpg" class="ls-bg" alt="Slide background">
+
 
           <div class="ls-l ls-title" style="top: 96px; left: 35%; white-space: nowrap;" data-ls="
             fade: true; 
@@ -85,6 +87,7 @@
         </div>
         <!-- slide two end -->
 
+        <% if false %>
         <!-- slide three start -->
         <div class="ls-slide ls-slide3" data-ls="offsetxin: right; slidedelay: 7000; transition2d: 92,93,105;">
 
@@ -159,10 +162,12 @@
 
         </div>
         <!-- slide four end -->
+        <% end %>
       </div>
       <!-- LayerSlider end -->
     </div>
     <!-- END SLIDER -->
+    <% end %>
 
     <div class="main">
       <div class="container">
@@ -172,7 +177,7 @@
           <div class="col-md-12 sale-product">
             <h2>新品上市</h2>
             <div class="owl-carousel owl-carousel5">
-              <% Item.limit(8).each do |item| %>
+              <% Item.new_arrivals.limit(8).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
@@ -184,7 +189,7 @@
                   <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
                   <div class="pi-price">¥<%= item.price %></div>
                   <a href="javascript: void(0);" item-id="<%= item.id.to_s %>" class="btn btn-default add2cart">加入购物车</a>
-                  <div class="sticker sticker-sale"></div>
+                  <div class="sticker sticker-new"></div>
                 </div>
               </div>
               <% end %>
@@ -209,7 +214,7 @@
           <div class="col-md-9 col-sm-8">
             <h2>特价商品</h2>
             <div class="owl-carousel owl-carousel3">
-              <% Item.limit(7).each do |item| %>
+              <% Item.on_sale.limit(7).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
@@ -221,7 +226,7 @@
                   <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
                   <div class="pi-price">¥<%= item.price %></div>
                   <a href="javascript: void(0);" item-id="<%= item.id.to_s %>" class="btn btn-default add2cart">加入购物车</a>
-                  <div class="sticker sticker-new"></div>
+                  <div class="sticker sticker-sale"></div>
                 </div>
               </div>
               <% end %>
@@ -260,7 +265,7 @@
                   <h3><a href="javascript: void(0);"><%= item.name %></a></h3>
                   <div class="pi-price">¥<%= item.price %></div>
                   <a href="javascript: void(0);" item-id="<%= item.id.to_s %>" class="btn btn-default add2cart">加入购物车</a>
-                  <div class="sticker sticker-new"></div>
+                  <div class="sticker sticker-hot"></div>
                 </div>
               </div>
               <% end %>

@@ -18,7 +18,7 @@ class ItemsController < BaseController
 	end
 
 	def create
-		item = Item.new(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id))
+		item = Item.new(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :on_sale, :hot, :new_arrivals))
 		item.save!
 
 		redirect_to admin_items_path, notice: '创建成功！'
@@ -26,7 +26,7 @@ class ItemsController < BaseController
 
 	def update
 		item = Item.find(params[:id])
-		item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :in_price))
+		item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :in_price, :on_sale, :hot, :new_arrivals))
 		# item.save!
 
 		redirect_to admin_items_path, notice: '编辑成功！'
