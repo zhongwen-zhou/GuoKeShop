@@ -2,9 +2,9 @@ class ItemsController < ApplicationController
 	def category
 		@current_category = Category.find params[:category_id]
 		if @current_category.level == 1
-			@items = Item.where(category_id: @current_category).paginate(:page => params[:page], :per_page => 20)
-		else
 			@items = Item.where(top_category_id: @current_category.parent_id).paginate(:page => params[:page], :per_page => 20)
+		else
+			@items = Item.where(category_id: @current_category).paginate(:page => params[:page], :per_page => 20)
 		end
 	end
 

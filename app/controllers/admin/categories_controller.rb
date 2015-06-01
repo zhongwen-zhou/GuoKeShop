@@ -13,6 +13,10 @@ class CategoriesController < BaseController
 		@category = Category.new
 	end
 
+	def edit
+		@category = Category.find params[:id]
+	end
+
 	def create
 		category = Category.new(params.require(:category).permit(:name, :parent_id, :shelf_no))
 		category.level = 2 unless params[:category][:parent_id].blank?
@@ -21,11 +25,20 @@ class CategoriesController < BaseController
 		redirect_to admin_categories_path, notice: '创建成功！'
 	end
 
+	def update
+		category = Category.find params[:id]
+		category.update(params.require(:category).permit(:name, :parent_id, :shelf_no))
+		category.level = 2 unless params[:category][:parent_id].blank?
+		category.save!
+
+		redirect_to admin_categories_path, notice: '修改成功！'
+	end
+
 	def destroy
-		@game = Game.find params[:id]
-		@game.destroy
+		@category = Category.find params[:id]
+		@category.destroy
 		
-		redirect_to admin_games_path, notice: '删除成功！'
+		redirect_to admin_categories_path, notice: '删除成功！'
 	end
 
 	def query

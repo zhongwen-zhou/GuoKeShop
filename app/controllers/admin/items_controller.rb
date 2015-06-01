@@ -26,7 +26,7 @@ class ItemsController < BaseController
 
 	def update
 		item = Item.find(params[:id])
-		item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id))
+		item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :in_price))
 		# item.save!
 
 		redirect_to admin_items_path, notice: '编辑成功！'
