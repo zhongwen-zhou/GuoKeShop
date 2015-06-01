@@ -94,7 +94,7 @@
       <div class="col-md-12 col-sm-12">
         <h2>更多热门商品</h2>
         <div class="owl-carousel owl-carousel4">
-          <% Item.hot.each do |item| %>
+          <% Item.hot.limit(6).each do |item| %>
             <div>
               <div class="product-item">
                 <div class="pi-img-wrapper">

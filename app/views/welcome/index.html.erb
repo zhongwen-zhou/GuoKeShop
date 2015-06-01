@@ -248,7 +248,7 @@
           <div class="col-md-9 col-sm-8">
             <h2>"<%= top_category.name %>" 热销</h2>
             <div class="owl-carousel owl-carousel3">
-              <% Item.where(:top_category_id => top_category.id).each do |item| %>
+              <% Item.where(:top_category_id => top_category.id).limit(7).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
