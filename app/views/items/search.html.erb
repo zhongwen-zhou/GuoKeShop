@@ -6,6 +6,7 @@
     </ul>
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
+      <% if false %>
       <!-- BEGIN SIDEBAR -->
       <div class="sidebar col-md-3 col-sm-5">
 
@@ -21,6 +22,43 @@
         </div>
       </div>
       <!-- END SIDEBAR -->
+      <% end %>
+
+      <!-- BEGIN SIDEBAR -->
+      <div class="sidebar col-md-3 col-sm-5" style="z-index: 1;">
+        <ul class="list-group margin-bottom-25 sidebar-menu">
+          <% Category.top_category.each_with_index do |top_category, index| %>
+          <li class="list-group-item clearfix dropdown <%= 'active' if(index == 0) %>">
+            <a href="javascript:void(0);" role="category_nav_btn" class="collapsed">
+              <i class="fa fa-angle-right"></i>
+              <%= top_category.name %>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu" style="display:block;">
+              <% top_category.children.each do |category| %>
+              <li <%= "class=active" if category == @current_category %>>
+                <a href="/items/category?category_id=<%= category.id %>"><i class="fa fa-angle-right"></i><%= category.name %></a>
+              </li>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+        </ul>
+
+        <div class="sidebar-products clearfix">
+          <h2>畅销商品</h2>
+          <% Item.hot.each do |item| %>
+          <div class="item">
+            <a href="javascript: void(0);"><img src="/<%= item.cover_path %>" alt="Some Shoes in Animal with Cut Out"></a>
+            <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
+            <div class="price">¥<%= item.price %></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <!-- END SIDEBAR -->
+
+
       <!-- BEGIN CONTENT -->
       <div class="col-md-9 col-sm-7">
         <div class="content-search margin-bottom-20">
@@ -118,3 +156,53 @@
     <!-- END SIDEBAR & CONTENT -->
   </div>
 </div>
+
+    <%= content_for :page_script do %>
+
+    <% if true %>
+    <script src="../../assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <% end %>
+    <script src="../../assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='../../assets/global/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="../../assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+
+    <!-- BEGIN LayerSlider -->
+    <script src="../../assets/global/plugins/slider-layer-slider/js/greensock.js" type="text/javascript"></script><!-- External libraries: GreenSock -->
+    <script src="../../assets/global/plugins/slider-layer-slider/js/layerslider.transitions.js" type="text/javascript"></script><!-- LayerSlider script files -->
+    <script src="../../assets/global/plugins/slider-layer-slider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script><!-- LayerSlider script files -->
+    <script src="../../assets/frontend/pages/scripts/layerslider-init.js" type="text/javascript"></script>
+    <!-- END LayerSlider -->
+
+    <script src="../../assets/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        function initTouchspin_tony(){
+          $(".product-quantity .form-control").TouchSpin({
+              buttondown_class: "btn quantity-down",
+              buttonup_class: "btn quantity-up"
+          }).on('change',function(){
+            var count = $(this).val();
+            console.log(count);
+          });
+        }
+
+
+
+        jQuery(document).ready(function() {
+
+            Layout.init();    
+            Layout.initOWL();
+            LayersliderInit.initLayerSlider();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+
+
+            $('a[role=category_nav_btn]').click(function(){
+              $(this).children()[0].click();
+            });
+
+        });
+    </script>
+
+
+    <% end %>

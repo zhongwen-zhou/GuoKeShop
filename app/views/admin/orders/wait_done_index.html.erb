@@ -53,8 +53,8 @@
       <td><%= order.created_at.strftime('%Y-%m-%d') %></td>
       <td><%= order.remark %></td>
       <td>
-        <%= form_tag(sent_admin_order_path(order)) do |f| %>
-          <%= submit_tag "发货", data: { confirm: "确定商品都挑选完整，可以发货？" } %>
+        <%= form_tag(done_admin_order_path(order)) do |f| %>
+          <%= submit_tag "确认回执", data: { confirm: "确定订单已经完成？" } %>
         <% end %>
         <%= link_to '订单详情', admin_order_path(order) %>
       </td>

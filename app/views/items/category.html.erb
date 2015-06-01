@@ -22,7 +22,7 @@
         <ul class="list-group margin-bottom-25 sidebar-menu">
           <% Category.top_category.each do |top_category| %>
           <li class="list-group-item clearfix dropdown <%= 'active' if(top_category == @current_category || top_category == @current_category.parent)%>">
-            <a href="javascript:void(0);" class="collapsed">
+            <a href="javascript:void(0);" role="category_nav_btn" class="collapsed">
               <i class="fa fa-angle-right"></i>
               <%= top_category.name %>
               <i class="fa fa-angle-down"></i>
@@ -98,7 +98,7 @@
                   <a item-id="<%= item.id.to_s %>" href="javascript: void(0);" class="btn btn-default fancybox-fast-view2">详情</a>
                 </div>
               </div>
-              <h3><a href="shop-item.html"><%= item.name %></a></h3>
+              <h3><a href="shop-item.html"><%= "#{item.name}-#{item.units}" %></a></h3>
               <div class="pi-price">¥<%= item.price %></div>
               <a item-id="<%= item.id.to_s %>" href="javascript: void(0);" class="btn btn-default add2cart">加入购物车</a>
             </div>
@@ -110,6 +110,7 @@
         <!-- BEGIN PAGINATOR -->
         <div class="row">
           <div class="col-md-4 col-sm-4 items-info">共 <%= @items.total_entries %> 条商品纪录</div>
+          <% if false %>
           <div class="col-md-8 col-sm-8">
             <ul class="pagination pull-right">
               <% if @items.current_page > @items.total_pages %>
@@ -129,6 +130,7 @@
               <% end %>
             </ul>
           </div>
+          <% end %>
         </div>
         <!-- END PAGINATOR -->
       </div>
@@ -157,6 +159,11 @@
             Layout.initTouchspin();
             Layout.initUniform();
             Layout.initSliderRange();
+
+
+            $('a[role=category_nav_btn]').click(function(){
+              $(this).children()[0].click();
+            });
 
 
         });
