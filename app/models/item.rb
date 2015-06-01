@@ -40,6 +40,8 @@ class Item
 
 	scope :stockout, -> {where(repo_count: 0)}	#无货商品
 
+	scope :on_shelf, -> {where(on_shelf: true)}	#无货商品
+
   # mount_uploader :cover, ::CoverUploader # 封面
 
   def empty_repos?
