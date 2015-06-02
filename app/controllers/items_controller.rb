@@ -2,14 +2,14 @@ class ItemsController < ApplicationController
 	def category
 		@current_category = Category.find params[:category_id]
 		if @current_category.level == 1
-			@items = Item.on_shelf.where(top_category_id: @current_category.parent_id).order(order_index: :asc).paginate(:page => params[:page], :per_page => 20)
+			@items = Item.on_shelf.where(top_category_id: @current_category.parent_id).order(order_index: :asc).paginate(:page => params[:page], :per_page => 200)
 		else
-			@items = Item.on_shelf.where(category_id: @current_category).order(order_index: :asc).paginate(:page => params[:page], :per_page => 20)
+			@items = Item.on_shelf.where(category_id: @current_category).order(order_index: :asc).paginate(:page => params[:page], :per_page => 200)
 		end
 	end
 
 	def search
-		@items = Item.on_shelf.where(name: /#{params[:keyword]}/).order(order_index: :asc).all.paginate(:page => params[:page])
+		@items = Item.on_shelf.where(name: /#{params[:keyword]}/).order(order_index: :asc).all.paginate(:page => params[:page], :per_page => 200)
 	end
 
 	def index
