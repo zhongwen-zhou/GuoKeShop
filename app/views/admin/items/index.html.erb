@@ -21,9 +21,11 @@
     <tr>
       <th>编号</th>
       <th>商品名</th>
-      <th>厂家</th>
       <th>定价</th>
       <th>进价</th>
+      <th>是否上架</th>
+      <th>是否新品</th>
+      <th>是否特价</th>
       <th>仓库余量</th>
       <th>操作</th>
     </tr>
@@ -32,10 +34,12 @@
   <% @items.each_with_index do |item, index| %>
     <tr>
       <td><%= index %></td>
-      <td><%= item.name %></td>
-      <td><%= item.brand %></td>
+      <td><%= "#{item.name}-#{item.units}" %></td>
       <td><%= item.price %></td>
       <td><%= item.in_price %></td>
+      <td><%= item.on_shelf ? '是' : '否' %></td>
+      <td><%= item.new_arrivals ? '是' : '否' %></td>
+      <td><%= item.on_sale ? '是' : '否' %></td>
       <td><%= item.repo_count %></td>
       <td>
         <%= link_to '编辑', edit_admin_item_path(item) %>

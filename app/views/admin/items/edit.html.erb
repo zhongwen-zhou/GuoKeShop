@@ -23,6 +23,13 @@
 货架地址：<%= f.text_field :shelf_no, :placeholder => "请输入货架地址" %><br/>
 仓库存量：<%= f.text_field :repo_count, :placeholder => "请输入仓库存量" %><br/>
 
+是否上架：
+<select name="item[on_shelf]">
+	<option value="true" <%= "selected='selected'" if @item.on_shelf %>>是</option>
+	<option value="false" <%= "selected='selected'" if !@item.on_shelf %>>否</option>
+</select>
+
+
 是否热销商品：
 <select name="item[hot]">
 	<option value="true" <%= "selected='selected'" if @item.hot %>>是</option>

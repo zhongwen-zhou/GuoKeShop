@@ -416,7 +416,7 @@ License: You must have a valid license purchased only from themeforest (the abov
 
 
           //详情预览
-          $('.fancybox-fast-view2').click(function(){
+          $('[role=fast-view-start]').click(function(){
             var item_id = $(this).attr('item-id');
             var url = "/items/"+item_id;
             $.get(url, function(data){
