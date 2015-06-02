@@ -70,6 +70,11 @@
                         </ul>
                       </div>
                       <div class="clearfix"></div>
+
+                      <% if [23,0,1,2,3,4,5,6].include? Time.now.hour %>
+                        <p style="font-size: 16px; color: red;">目前是夜间服务期间请通过电话（028-61438163）进行下单</p>
+                      <% end %>
+
                       <button class="btn btn-primary pull-right" type="submit" id="button-confirm">确认订单</button>
                       <a href="/carts" type="button" class="btn btn-default pull-right margin-right-20">返回购物车</a>
                     </div>

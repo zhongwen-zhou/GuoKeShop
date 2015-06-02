@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 		  end
 		end
 		# @shipping_price = 2 if @item_total_price < 30
-		@shipping_price = 5 if [23,0,1,2,3,4,5,6,7].include? Time.now.hour
+		@shipping_price = 5 if [23,0,1,2,3,4,5,6].include? Time.now.hour
 		@total_price = @shipping_price + @item_total_price
 	end
 
@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
 		  	items_total_price += item_price
 		  end
 		end
-		shipping_price = 5 if [23,0,1,2,3,4,5,6,7].include? Time.now.hour
+		shipping_price = 5 if [23,0,1,2,3,4,5,6].include? Time.now.hour
 		# shipping_price = 2 if items_total_price < 30
 		total_price = shipping_price + items_total_price
 
