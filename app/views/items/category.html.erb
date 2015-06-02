@@ -43,7 +43,9 @@
           <% Item.on_shelf.hot.order(order_index: :asc).each do |item| %>
           <div class="item">
             <a href="javascript: void(0);"><img src="/<%= item.cover_path %>" alt="Some Shoes in Animal with Cut Out"></a>
-            <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
+            <h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>" ><%= "#{item.name}-#{item.units}" %></a></h3>
+<h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>" ><%= "#{item.name}-#{item.units}" %></a></h3>
+<h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>><%= "#{item.name}-#{item.units}" %></a></h3>
             <div class="price">¥<%= item.price %></div>
           </div>
           <% end %>
@@ -95,10 +97,12 @@
               <div class="pi-img-wrapper">
                 <img src="/<%= item.cover_path %>" class="img-responsive" alt="Berry Lace Dress">
                 <div>
-                  <a item-id="<%= item.id.to_s %>" href="javascript: void(0);" class="btn btn-default fancybox-fast-view2">详情</a>
+                  <a item-id="<%= item.id.to_s %>" href="javascript: void(0);" role="fast-view-start" class="btn btn-default fancybox-fast-view2">详情</a>
                 </div>
               </div>
-              <h3><a href="javascript: void(0);"><%= "#{item.name}-#{item.units}" %></a></h3>
+              <h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>" ><%= "#{item.name}-#{item.units}" %></a></h3>
+<h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>" ><%= "#{item.name}-#{item.units}" %></a></h3>
+<h3><a href="javascript: void(0);" role="fast-view-start" item-id="<%= item.id.to_s %>><%= "#{item.name}-#{item.units}" %></a></h3>
               <div class="pi-price">¥<%= item.price %></div>
               <a item-id="<%= item.id.to_s %>" href="javascript: void(0);" class="btn btn-default add2cart">加入购物车</a>
             </div>

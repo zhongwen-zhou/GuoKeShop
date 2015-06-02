@@ -20,6 +20,7 @@
   <thead>
     <tr>
       <th>编号</th>
+      <th>条码编号</th>
       <th>商品名</th>
       <th>定价</th>
       <th>进价</th>
@@ -34,6 +35,7 @@
   <% @items.each_with_index do |item, index| %>
     <tr>
       <td><%= index %></td>
+      <td><%= item.bar_code %></td>
       <td><%= "#{item.name}-#{item.units}" %></td>
       <td><%= item.price %></td>
       <td><%= item.in_price %></td>
