@@ -28,6 +28,8 @@ class Item
 
 	field :cover_path, type: String	#封面图片路径
 
+	field :order_index, type: Integer, default: 1	#排序
+
 	# field :cover, type: String	#图片
 
 	attr_accessor :cover, :cover_cache

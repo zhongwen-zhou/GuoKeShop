@@ -39,7 +39,7 @@ class CartsController < ApplicationController
 		item = Item.find params['item_id']
 		return render status: 403, json: {status: 'no_item_count'} if item.empty_repos?
 		session[:carts] ||= {}
-		session[:carts].merge!({item.id.to_s => {name: item.name, count: params[:count], price: item.price}})
+		session[:carts].merge!({item.id.to_s => {name: item.name, count: params[:count], price: item.price, units: item.units}})
 		render json: true
 	end
 

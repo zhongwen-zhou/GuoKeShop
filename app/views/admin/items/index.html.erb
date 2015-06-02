@@ -40,6 +40,9 @@
       <td>
         <%= link_to '编辑', edit_admin_item_path(item) %>
         <%= link_to '删除', admin_item_path(item), method: :delete, data: { confirm: "你确定要删除这件商品吗?" } %>
+
+        <%= link_to '向上移动', move_up_admin_item_path(item, category_id: params[:category_id]) %>
+        <%= link_to '向下移动', move_down_admin_item_path(item, category_id: params[:category_id]) %>
       </td>
     </tr>
   <% end %>

@@ -62,7 +62,12 @@ Rails.application.routes.draw do
   # 网站后台
   namespace :admin do
     root 'welcome#index'
-    resources :items
+    resources :items do
+      member do
+        get :move_up
+        get :move_down
+      end
+    end
     resources :orders do
       collection do
         get :new_comming_orders
