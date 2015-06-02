@@ -18,7 +18,7 @@ module Admin
 		end
 
 		def create
-			item = Item.new(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :on_sale, :hot, :new_arrivals))
+			item = Item.new(params.require(:item).permit(:bar_code, :name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :on_sale, :hot, :new_arrivals))
 			item.order_index = Category.find(item.category_id).children.count + 1
 			item.save!
 
@@ -27,7 +27,7 @@ module Admin
 
 		def update
 			item = Item.find(params[:id])
-			item.update_attributes!(params.require(:item).permit(:name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :in_price, :on_sale, :hot, :new_arrivals))
+			item.update_attributes!(params.require(:item).permit(:bar_code, :name, :brand, :units, :desc, :price, :repo_count, :on_way_count, :category_id, :in_price, :on_sale, :hot, :new_arrivals))
 			# item.save!
 
 			redirect_to admin_items_path, notice: '编辑成功！'
