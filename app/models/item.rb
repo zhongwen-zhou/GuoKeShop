@@ -26,7 +26,7 @@ class Item
 
 	field :on_shelf, type: Boolean, default: true	#是否上架
 
-	field :cover_path, type: String	#封面图片路径
+	# field :cover_path, type: String	#封面图片路径
 
 	field :order_index, type: Integer, default: 1	#排序
 
@@ -45,6 +45,11 @@ class Item
 	scope :on_shelf, -> {where(on_shelf: true)}	#上架商品
 
   # mount_uploader :cover, ::CoverUploader # 封面
+
+	def cover_path
+		"/items/#{bar_code}/1.jpg"
+	end
+
 
   def empty_repos?
   	repo_count == 0
