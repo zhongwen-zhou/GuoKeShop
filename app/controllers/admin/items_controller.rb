@@ -41,7 +41,7 @@ module Admin
 		end
 
 		def query
-			@items = Item.all
+			@items = Item.all.order(order_index: :asc)
 		end
 
 		def move_up

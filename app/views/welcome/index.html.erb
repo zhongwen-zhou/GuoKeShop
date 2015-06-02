@@ -181,7 +181,7 @@
           <div class="col-md-12 sale-product">
             <h2>新品上市</h2>
             <div class="owl-carousel owl-carousel5">
-              <% Item.new_arrivals.limit(8).each do |item| %>
+              <% Item.new_arrivals.order(order_index: :asc).limit(8).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
@@ -218,7 +218,7 @@
           <div class="col-md-9 col-sm-8">
             <h2>特价商品</h2>
             <div class="owl-carousel owl-carousel3">
-              <% Item.on_sale.limit(7).each do |item| %>
+              <% Item.on_sale.order(order_index: :asc).limit(7).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
@@ -257,7 +257,7 @@
           <div class="col-md-9 col-sm-8">
             <h2>"<%= top_category.name %>" 热销</h2>
             <div class="owl-carousel owl-carousel3">
-              <% Item.where(:top_category_id => top_category.id).limit(7).each do |item| %>
+              <% Item.where(:top_category_id => top_category.id).order(order_index: :asc).limit(7).each do |item| %>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">

@@ -2,18 +2,18 @@ class ItemsController < ApplicationController
 	def category
 		@current_category = Category.find params[:category_id]
 		if @current_category.level == 1
-			@items = Item.where(top_category_id: @current_category.parent_id).paginate(:page => params[:page], :per_page => 20)
+			@items = Item.where(top_category_id: @current_category.parent_id).order(order_index: :asc).paginate(:page => params[:page], :per_page => 20)
 		else
-			@items = Item.where(category_id: @current_category).paginate(:page => params[:page], :per_page => 20)
+			@items = Item.where(category_id: @current_category).order(order_index: :asc).paginate(:page => params[:page], :per_page => 20)
 		end
 	end
 
 	def search
-		@items = Item.where(name: /#{params[:keyword]}/).all.paginate(:page => params[:page])
+		@items = Item.where(name: /#{params[:keyword]}/).order(order_index: :asc).all.paginate(:page => params[:page])
 	end
 
 	def index
-		@items = Item.where(category_id: params[:category_id])
+		@items = Item.where(category_id: params[:category_id]).order(order_index: :asc)
 		render 'welcome/index'
 	end
 
