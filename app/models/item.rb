@@ -47,7 +47,7 @@ class Item
   # mount_uploader :cover, ::CoverUploader # 封面
 
 	def cover_path
-		"/items/#{bar_code}/1.jpg"
+		"items/#{bar_code}/1.jpg"
 	end
 
 
