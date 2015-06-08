@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_filter :check_mobile
+
+  def check_mobile
+    user_agent = request.user_agent
+    @is_pc = user_agent.index('iPhone').nil? && user_agent.index('Android').nil?
+  end
+
   # layout 'shoppe'
   # def pjax_layout
     # 'pjax'

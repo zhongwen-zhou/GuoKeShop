@@ -58,16 +58,26 @@
   <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
 <% end %>
 
+<p style="display: none;">
+  <audio id="tip-audio" src="/datas/horse.ogg">
+</audio>
+</p>
+
 <script type="text/javascript">
   $(function() {
+    <% if params[:controller] == 'admin/sessions' && params[:action] == 'new' %>
+    <% else %>
     setInterval(function(){
       $.get('/admin/orders/new_comming_orders.json', function(data){
         console.log(data);
         if(data.new_orders_count != 0){
+          var audio = document.getElementById('tip-audio');
           toastr.info('您有新订单等待处理！');
+          audio.play();
         }
       });
     }, 2500);
+    <% end %>
   });
 </script>
 </body>
