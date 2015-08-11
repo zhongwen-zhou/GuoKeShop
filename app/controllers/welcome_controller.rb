@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-	
+layout 'app'
+
 	def index
 		session[:cut] ||= []
 		@items = Item.where(category_id: params[:category_id])
