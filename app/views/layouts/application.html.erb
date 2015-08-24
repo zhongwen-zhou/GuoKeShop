@@ -459,7 +459,119 @@ License: You must have a valid license purchased only from themeforest (the abov
     <%= yield :page_script %>
     <!-- END PAGE LEVEL JAVASCRIPTS -->
     
+    <script type="text/javascript">
+
+
+    function buyCaipiao()
+    {
+      var valueText = $('.keyvalueeditor-value-text')[2];
+      valueText = $(valueText);
+      var value = "";
+      $.getJSON('http://localhost:3000/api/caipiao/latest_caipiao.json', null, function(data){
+
+        if(data){
+          value = data.value;
+          code_no = data.code_no;
+          city_no = data.city_no;
+
+          valueText.val(value);
+
+          var submitBtn = $('#submit-request');
+
+          submitBtn.click();
+
+          console.log('已经提交订单！');
+
+          setTimeout(function(){
+            var pres = $('div pre');
+            var pre = pres[pres.length - 2];
+            var strVal = $(pre).html();
+
+            console.log(strVal);
+            if(strVal.indexOf("100"))
+            {
+              $.post('http://localhost:3000/api/caipiao/bought', {'code_no' : code_no, 'city_no' : city_no}, function(data){
+                  // console.log(data);
+                  console.log("购买成功！");
+              })
+            }else{
+              console.log("购买失败！");
+            }
+
+          }, 5000)
+         
+        }else{
+          console.log("购买过了！");
+        }
+      
+      });
+    }
+
+
+
+
+
+    var cities_no = ["7", "8", "9", "10"];
+    var current_index = 0;
+
+    function refreshResult(){
+      var t = new Date();
+      var long_t = t.getTime();
+
+      var city_no = cities_no[current_index%4];
+
+      current_index++;
+
+      if(current_index > 10000)
+      {
+        current_index = 0;
+      }
+
+      var valueText = $('.keyvalueeditor-value-text')[2];
+      valueText = $(valueText);
+
+      var value = "" + long_t-1000*60*5 +","+long_t+","+city_no+",1440223303";
+      console.log(value);
+
+        valueText.val(value);
+
+        var submitBtn = $('#submit-request');
+
+        submitBtn.click();
+
+        setTimeout(function(){
+          var pres = $('div pre');
+          var pre = pres[pres.length - 2];
+          var strVal = $(pre).html();
+
+          console.log(strVal);
+          $.post('http://localhost:3000/api/caipiao/push_last_result', {'strValue' : strVal}, function(data){
+            console.log(data);
+          })
+
+        }, 3000)
+    }
+
+    var autoPlay = setInterval(buyCaipiao, 1000*60*3);
+
+
+    function getMyMoney(){
+      var submitBtn = $('#submit-request');
+      submitBtn.click();
+      setTimeout(function(){
+        var pre = $('pre')[5];
+        var strVal = $(pre).html();
+
+        $.post('http://localhost:3000/api/caipiao/my_money', {'strValue' : strVal}, function(data){
+          console.log(data);
+        })
+      }, 3000)
+    }
+
+
+    </script>
     
+
 </body>
 <!-- END BODY -->
 </html>

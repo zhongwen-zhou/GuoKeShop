@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   # API
   namespace :api do
+    get 'caipiao/latest_caipiao', to: 'caipiaos#latest_caipiao'
+    post 'caipiao/push_last_result', to: 'caipiaos#push_last_result'
+    post 'caipiao/bought', to: 'caipiaos#bought'
+    post 'caipiao/my_money', to: 'caipiaos#my_money'
+    get 'caipiao/money', to: 'caipiaos#money'
     resources :channels, :only => [] do
       resources :channel_games, :only => [:index] do
         resources :access_details, :only => [:create]
