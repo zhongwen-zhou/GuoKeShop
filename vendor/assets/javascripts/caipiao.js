@@ -26,17 +26,17 @@ var caipiao_datas = {
       'max_lost_num' : '01'
     },
     'nums' : {
-      '01' : {'lost' : 2},
+      '01' : {'lost' : 0},
       '02' : {'lost' : 0},
-      '03' : {'lost' : 5},
-      '04' : {'lost' : 1},
-      '05' : {'lost' : 2},
+      '03' : {'lost' : 0},
+      '04' : {'lost' : 0},
+      '05' : {'lost' : 0},
       '06' : {'lost' : 0},
-      '07' : {'lost' : 3},
+      '07' : {'lost' : 0},
       '08' : {'lost' : 0},
       '09' : {'lost' : 0},
       '10' : {'lost' : 0},
-      '11' : {'lost' : 1},
+      '11' : {'lost' : 0},
     }
   },
   '8' : {
@@ -48,15 +48,15 @@ var caipiao_datas = {
     'nums' : {
       '01' : {'lost' : 0},
       '02' : {'lost' : 0},
-      '03' : {'lost' : 2},
+      '03' : {'lost' : 0},
       '04' : {'lost' : 0},
       '05' : {'lost' : 0},
-      '06' : {'lost' : 1},
-      '07' : {'lost' : 3},
-      '08' : {'lost' : 5},
+      '06' : {'lost' : 0},
+      '07' : {'lost' : 0},
+      '08' : {'lost' : 0},
       '09' : {'lost' : 0},
-      '10' : {'lost' : 1},
-      '11' : {'lost' : 2},
+      '10' : {'lost' : 0},
+      '11' : {'lost' : 0},
     }
   },
   '9' : {
@@ -66,13 +66,13 @@ var caipiao_datas = {
       'max_lost_num' : '01'
     },
     'nums' : {
-      '01' : {'lost' : 3},
+      '01' : {'lost' : 0},
       '02' : {'lost' : 0},
-      '03' : {'lost' : 2},
-      '04' : {'lost' : 1},
-      '05' : {'lost' : 1},
-      '06' : {'lost' : 2},
-      '07' : {'lost' : 1},
+      '03' : {'lost' : 0},
+      '04' : {'lost' : 0},
+      '05' : {'lost' : 0},
+      '06' : {'lost' : 0},
+      '07' : {'lost' : 0},
       '08' : {'lost' : 0},
       '09' : {'lost' : 0},
       '10' : {'lost' : 0},
@@ -86,17 +86,17 @@ var caipiao_datas = {
       'max_lost_num' : '01'
     },
     'nums' : {
-      '01' : {'lost' : 6},
+      '01' : {'lost' : 0},
       '02' : {'lost' : 0},
-      '03' : {'lost' : 1},
-      '04' : {'lost' : 2},
+      '03' : {'lost' : 0},
+      '04' : {'lost' : 0},
       '05' : {'lost' : 0},
-      '06' : {'lost' : 1},
+      '06' : {'lost' : 0},
       '07' : {'lost' : 0},
-      '08' : {'lost' : 9},
+      '08' : {'lost' : 0},
       '09' : {'lost' : 0},
       '10' : {'lost' : 0},
-      '11' : {'lost' : 2},
+      '11' : {'lost' : 0},
     }
   },      
 };  //我的彩票记录
@@ -241,7 +241,7 @@ function mainWorkFlow(){
     if(_new_caipiao && _new_caipiao['num'] && _new_caipiao['times'] && _new_caipiao['city_no'] && _new_caipiao['no']){
       //彩票数据格式合规
 
-      console.log(getBetValue(_new_caipiao));
+      // console.log(getBetValue(_new_caipiao));
       fireCaiPiaoEvent('bet', _new_caipiao, function(data){
           if(data['c']=='100'){
             //购买成功
@@ -397,6 +397,17 @@ function initMoney(){
 
     console.log('----初始化完毕----投注单位已设为：'+unit);
     console.log('----程序即将自动执行----');
+  });
+}
+
+//推送金额到服务器
+function pushMoney(){
+  fireCaiPiaoEvent('getMoney', null, function(data){
+    $.post('http://ssda.cc/api/caipiao/my_money', {'strValue' : data}, function(_data){
+      if(_data){
+        console.log('金额推送成功！');
+      }
+    })
   });
 }
 
