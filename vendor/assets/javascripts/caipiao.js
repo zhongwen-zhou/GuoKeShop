@@ -26,16 +26,16 @@ var caipiao_datas = {
       'max_lost_num' : '01'
     },
     'nums' : {
-      '01' : {'lost' : 0},
+      '01' : {'lost' : 5},
       '02' : {'lost' : 0},
       '03' : {'lost' : 0},
       '04' : {'lost' : 0},
-      '05' : {'lost' : 0},
-      '06' : {'lost' : 0},
+      '05' : {'lost' : 4},
+      '06' : {'lost' : 1},
       '07' : {'lost' : 0},
-      '08' : {'lost' : 0},
-      '09' : {'lost' : 0},
-      '10' : {'lost' : 0},
+      '08' : {'lost' : 1},
+      '09' : {'lost' : 1},
+      '10' : {'lost' : 3},
       '11' : {'lost' : 0},
     }
   },
@@ -46,16 +46,16 @@ var caipiao_datas = {
       'max_lost_num' : '01'
     },
     'nums' : {
-      '01' : {'lost' : 0},
-      '02' : {'lost' : 0},
-      '03' : {'lost' : 0},
+      '01' : {'lost' : 1},
+      '02' : {'lost' : 1},
+      '03' : {'lost' : 1},
       '04' : {'lost' : 0},
       '05' : {'lost' : 0},
-      '06' : {'lost' : 0},
+      '06' : {'lost' : 1},
       '07' : {'lost' : 0},
-      '08' : {'lost' : 0},
+      '08' : {'lost' : 2},
       '09' : {'lost' : 0},
-      '10' : {'lost' : 0},
+      '10' : {'lost' : 2},
       '11' : {'lost' : 0},
     }
   },
@@ -68,13 +68,13 @@ var caipiao_datas = {
     'nums' : {
       '01' : {'lost' : 0},
       '02' : {'lost' : 0},
-      '03' : {'lost' : 0},
-      '04' : {'lost' : 0},
+      '03' : {'lost' : 1},
+      '04' : {'lost' : 4},
       '05' : {'lost' : 0},
-      '06' : {'lost' : 0},
-      '07' : {'lost' : 0},
-      '08' : {'lost' : 0},
-      '09' : {'lost' : 0},
+      '06' : {'lost' : 1},
+      '07' : {'lost' : 1},
+      '08' : {'lost' : 2},
+      '09' : {'lost' : 6},
       '10' : {'lost' : 0},
       '11' : {'lost' : 0},
     }
@@ -87,16 +87,16 @@ var caipiao_datas = {
     },
     'nums' : {
       '01' : {'lost' : 0},
-      '02' : {'lost' : 0},
+      '02' : {'lost' : 7},
       '03' : {'lost' : 0},
-      '04' : {'lost' : 0},
-      '05' : {'lost' : 0},
+      '04' : {'lost' : 5},
+      '05' : {'lost' : 3},
       '06' : {'lost' : 0},
       '07' : {'lost' : 0},
-      '08' : {'lost' : 0},
-      '09' : {'lost' : 0},
+      '08' : {'lost' : 1},
+      '09' : {'lost' : 1},
       '10' : {'lost' : 0},
-      '11' : {'lost' : 0},
+      '11' : {'lost' : 1},
     }
   },      
 };  //我的彩票记录
@@ -109,11 +109,19 @@ function generateNewCaipiao(_city_no, _no){
   var _max_lost_num = caipiao_datas[_city_no.toString()]['meta']['max_lost_num'];
 
   if(_max_lost > min_lost){
-    //遗漏大于6开始购买
-    _new_caipiao = {'city_no': _city_no.toString(), 'no': _no, 'times' : bet_times[_max_lost.toString()], 'num' : _max_lost_num, 'lost' : _max_lost, 'award' : false, 'is_win' : false, 'is_bought' : false};
-    my_caipiao_datas[_city_no+'-'+_no] = _new_caipiao;
-    console.log('购买 '+ _city_no + ' 城市的 第' + _no + ' 期新彩票');
-    return _new_caipiao;
+    //遗漏大于min_lost开始购买
+
+    var _first_no = parseInt(_no);
+    var _caipiaos = [];
+    for(var i = _max_lost; i< max_lost; i++){
+      _new_caipiao = {'city_no': _city_no.toString(), 'no': (_first_no+_caipiaos.length).toString(), 'times' : bet_times[i], 'num' : _max_lost_num, 'lost' : i, 'award' : false, 'is_win' : false, 'is_bought' : false};
+      _caipiaos.push(_new_caipiao);
+    }
+    return _caipiaos;
+    // _new_caipiao = {'city_no': _city_no.toString(), 'no': _no, 'times' : bet_times[_max_lost.toString()], 'num' : _max_lost_num, 'lost' : _max_lost, 'award' : false, 'is_win' : false, 'is_bought' : false};
+    // my_caipiao_datas[_city_no+'-'+_no] = _new_caipiao;
+    // console.log('购买 '+ _city_no + ' 城市的 第' + _no + ' 期新彩票');
+    // return _new_caipiao;
   }else{
     console.log('未达到购买条件！');
     return null;
@@ -175,6 +183,13 @@ function refreshLost(_city_no, _last_no, _last_nums){
 }
 
 function mainWorkFlow(){
+
+  var current_time = new Date();
+  var current_hour = current_time.getHours();
+  if(current_hour < 9 || current_hour > 21){
+    return null;
+  }
+
   var current_city_no = cities_no[current_city_no_index%4];
   current_city_no_index++;
 
@@ -226,7 +241,7 @@ function mainWorkFlow(){
         }else{
           //未中奖
           console.log('很遗憾，未中奖！');
-          _new_caipiao = generateTrackCaipiao(_new_no, _this_caipiao);
+          // _new_caipiao = generateTrackCaipiao(_new_no, _this_caipiao);
           //购买跟单彩票
         }
       }
@@ -260,28 +275,31 @@ function mainWorkFlow(){
 */
 
 
-var is_mac = true;
+var is_plugin = true;
 var url_text;
 var submit_btn;
 var valueText;
 
 var autoPlay;
 
-var min_lost = 6; //最小遗漏数
+var min_lost = 9; //最小遗漏数
+var max_lost = 14; //最大遗漏数
 var base_time;  //基础倍数
 
-var custom_time = 2;  //自定义倍数，n就是所有出来再乘以n倍
+var unit;
 
-if(is_mac){
-  //mac postman client;
+var custom_time = 3;  //自定义倍数，n就是所有出来再乘以n倍
+
+if(is_plugin){
+  //mac postman plugin;
   url_text = $('#url');
   submit_btn = $('#submit-request');
   valueText = $($('.keyvalueeditor-value-text')[2]);
 }else{
-  // win postman client
-  url_text = $('#url');
-  submit_btn = $('#submit-request');
-  valueText = $($('.keyvalueeditor-value-text')[2]);  
+  //postman client
+  var url_text = $('#url');
+  var submit_btn = $('#submit-request');
+  var valueText = $($('.keyvalueeditor-value-text')[2]);  
 }
 
 
@@ -315,7 +333,6 @@ function getBetValue(caipiao){
   var _city_no = caipiao['city_no'];
 
   var model = '3016';
-  var unit = 1;
 
   _times = _times * custom_time;
 
@@ -358,11 +375,11 @@ function getRequestJsonResult(){
 
   var valueData;
   var valueDataStr;
-  if(is_mac){
+  if(is_plugin){
     var resultPre = $($('div .CodeMirror-lines div pre').last());
     valueDataStr = resultPre.html();
   }else{
-    //windows
+    //postman client
     valueDataStr = $(document.getElementById('previewIframe').contentWindow.document.body).html();
   }
 
@@ -414,4 +431,4 @@ function pushMoney(){
 //client
 initMoney();
 mainWorkFlow();
-autoPlay = setInterval(mainWorkFlow, 1000*60*2);
+autoPlay = setInterval(mainWorkFlow, 1000*60*1);
