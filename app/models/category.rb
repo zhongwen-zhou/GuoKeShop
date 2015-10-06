@@ -11,4 +11,11 @@ class Category
 	has_many :children, class_name: 'Category', foreign_key: :parent #下级节点
 
 	scope :top_category, -> {where level: 1}
+
+	validates :name, :level, presence: true
+
+	# node_path, 0 ,001 002,001001 001002 001003
+	# query
+	# update path
+	# read/write
 end
