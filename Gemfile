@@ -39,6 +39,8 @@ gem 'thin'
 
 gem 'spreadsheet'
 
+gem 'httpclient'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

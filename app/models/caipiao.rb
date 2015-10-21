@@ -3,20 +3,6 @@ class Caipiao
 	include Mongoid::Document
 	include Mongoid::Timestamps
 
-
-	CITY_GUANGDONG = 7	# 广东11选5
-	CITY_SHANGHAI = 8		# 上海11选5
-	CITY_SHANDONG = 9		# 山东11选5
-	CITY_JIANGXI = 10		# 江西11选5
-
-	# 策略
-	STRATEGY_HEAD_RANDOM = 0		# 上把首2个任选1
-	STRATEGY_TAIL_RANDOM = 1		# 上把尾2个任选1
-	STRATEGY_HEAD_PLUS = 2			# 上把首数+1
-	STRATEGY_TONY = 3						# tone推荐算法
-
-	CITIES = {'7' => '广东', '8' => '上海', '9' => '山东', '10' => '江西'}
-
 	field :city_no, type: Integer, default: 0
 	field :city, type: String, default: ""
 
